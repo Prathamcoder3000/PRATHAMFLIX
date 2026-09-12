@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Container,
@@ -14,263 +16,347 @@ import {
   Badge,
   Surface,
   Divider,
-} from "@/components/ui";
+  PrathamflixLogo,
+  CinematicIntro,
+} from "@/components";
+import { useIntroState } from "@/hooks";
 import {
   Layers,
   Sparkles,
   Palette,
   Type,
   CheckCircle2,
-  AlertCircle,
   ArrowRight,
   Code2,
   Eye,
+  Play,
+  RotateCcw,
 } from "lucide-react";
 
-export default function DesignSystemShowcasePage() {
+export default function HomePage() {
+  const {
+    isIntroActive,
+    hasReducedMotion,
+    isMounted,
+    completeIntro,
+    replayIntro,
+  } = useIntroState();
+
   return (
-    <main className="py-12 sm:py-16 md:py-20">
-      <Container maxWidth="2xl">
-        {/* Header Block */}
-        <header className="space-y-4 mb-12">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="accent" size="md">
-              Phase 2: Visual Foundation
-            </Badge>
-            <Badge variant="subtle" size="md">
-              Design System Spec
-            </Badge>
-          </div>
-          <Heading1 className="tracking-tight text-white">
-            PRATHAMFLIX Design System
-          </Heading1>
-          <Paragraph className="max-w-2xl text-neutral-400">
-            A centralized, tokenized visual foundation engineered for cinematic,
-            high-performance developer portfolio interfaces.
-          </Paragraph>
-        </header>
+    <>
+      {/* Cinematic Opening Intro Experience */}
+      {isMounted && (
+        <CinematicIntro
+          isActive={isIntroActive}
+          onComplete={completeIntro}
+          hasReducedMotion={hasReducedMotion}
+        />
+      )}
 
-        <Divider variant="gradient" className="my-8" />
+      {/* Verification & Design Foundation Environment */}
+      <main className="min-h-screen py-10 sm:py-16 md:py-20">
+        <Container maxWidth="2xl">
+          {/* Header Block with Brand Wordmark */}
+          <header className="space-y-6 mb-12">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <PrathamflixLogo size="lg" />
 
-        {/* Section 1: Color Tokens & Surfaces */}
-        <section className="space-y-6 my-12" aria-labelledby="section-colors">
-          <div className="flex items-center gap-2.5">
-            <Palette className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
-            <Heading2 id="section-colors">Color Tokens & Surfaces</Heading2>
-          </div>
-          <Muted>
-            Semantic tokens define hierarchy, dark cinematic depth, and ambient contrast.
-          </Muted>
+              <div className="flex items-center gap-3">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={replayIntro}
+                  leftIcon={<RotateCcw className="h-3.5 w-3.5" />}
+                  aria-label="Replay Cinematic Intro"
+                >
+                  Replay Intro
+                </Button>
+                <Badge variant="accent" size="md">
+                  Phase 3: Brand & Intro
+                </Badge>
+              </div>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-            <Surface elevation="base" padding="md" className="space-y-2">
-              <Label>Base Surface</Label>
-              <Paragraph className="text-xs text-neutral-400">
-                Primary background foundation (`--surface`)
+            <div className="space-y-2">
+              <Heading1 className="tracking-tight text-white">
+                PRATHAMFLIX Brand Identity & Intro System
+              </Heading1>
+              <Paragraph className="max-w-2xl text-neutral-400">
+                Original vector branding, synthesized Web Audio sound architecture, and
+                Framer Motion cinematic intro sequence.
               </Paragraph>
-              <CodeText>#0f1118</CodeText>
+            </div>
+          </header>
+
+          <Divider variant="gradient" className="my-8" />
+
+          {/* Section 1: Logo & Brand Scale */}
+          <section className="space-y-6 my-12" aria-labelledby="section-brand">
+            <div className="flex items-center gap-2.5">
+              <Sparkles className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
+              <Heading2 id="section-brand">Brand Logo & Scale Tokens</Heading2>
+            </div>
+            <Muted>
+              Vector SVG geometric monogram and typographic wordmark scaling seamlessly across viewports.
+            </Muted>
+
+            <Surface elevation="elevated" padding="lg" className="space-y-6">
+              <div className="space-y-2">
+                <Label>Hero / Intro Size (hero)</Label>
+                <div className="p-4 rounded-xl bg-black/40 border border-white/5 flex items-center justify-center">
+                  <PrathamflixLogo size="hero" />
+                </div>
+              </div>
+
+              <Divider variant="subtle" />
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <Label>Large (lg)</Label>
+                  <div className="p-3 rounded-lg bg-black/30 border border-white/5 flex items-center">
+                    <PrathamflixLogo size="lg" />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Medium (md)</Label>
+                  <div className="p-3 rounded-lg bg-black/30 border border-white/5 flex items-center">
+                    <PrathamflixLogo size="md" />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Small (sm - Header / Nav)</Label>
+                  <div className="p-3 rounded-lg bg-black/30 border border-white/5 flex items-center">
+                    <PrathamflixLogo size="sm" />
+                  </div>
+                </div>
+              </div>
             </Surface>
+          </section>
 
-            <Surface elevation="elevated" padding="md" className="space-y-2">
-              <Label>Elevated Surface</Label>
-              <Paragraph className="text-xs text-neutral-400">
-                Lifted card & overlay level (`--surface-elevated`)
-              </Paragraph>
-              <CodeText>#161922</CodeText>
+          <Divider variant="subtle" className="my-10" />
+
+          {/* Section 2: Color Tokens & Surfaces */}
+          <section className="space-y-6 my-12" aria-labelledby="section-colors">
+            <div className="flex items-center gap-2.5">
+              <Palette className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
+              <Heading2 id="section-colors">Color Tokens & Surfaces</Heading2>
+            </div>
+            <Muted>
+              Semantic tokens define hierarchy, dark cinematic depth, and ambient contrast.
+            </Muted>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+              <Surface elevation="base" padding="md" className="space-y-2">
+                <Label>Base Surface</Label>
+                <Paragraph className="text-xs text-neutral-400">
+                  Primary background foundation (`--surface`)
+                </Paragraph>
+                <CodeText>#0f1118</CodeText>
+              </Surface>
+
+              <Surface elevation="elevated" padding="md" className="space-y-2">
+                <Label>Elevated Surface</Label>
+                <Paragraph className="text-xs text-neutral-400">
+                  Lifted card & overlay level (`--surface-elevated`)
+                </Paragraph>
+                <CodeText>#161922</CodeText>
+              </Surface>
+
+              <Surface elevation="glass" padding="md" className="space-y-2">
+                <Label>Glass Surface</Label>
+                <Paragraph className="text-xs text-neutral-400">
+                  Backdrop blur & translucency
+                </Paragraph>
+                <CodeText>rgba(255,255,255,0.03)</CodeText>
+              </Surface>
+
+              <Surface
+                elevation="subtle"
+                padding="md"
+                className="space-y-2 border-[var(--accent)]/30 bg-[var(--accent-subtle)]"
+              >
+                <Label className="text-[var(--accent)]">Brand Accent</Label>
+                <Paragraph className="text-xs text-neutral-300">
+                  Cinematic Crimson (`--accent`)
+                </Paragraph>
+                <CodeText>#e50926</CodeText>
+              </Surface>
+            </div>
+          </section>
+
+          <Divider variant="subtle" className="my-10" />
+
+          {/* Section 3: Typography Hierarchy */}
+          <section className="space-y-6 my-12" aria-labelledby="section-typography">
+            <div className="flex items-center gap-2.5">
+              <Type className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
+              <Heading2 id="section-typography">Typography Hierarchy</Heading2>
+            </div>
+            <Muted>
+              Proportional scale engineered for readability, high hierarchy, and responsiveness.
+            </Muted>
+
+            <Surface elevation="subtle" padding="lg" className="space-y-6">
+              <div className="space-y-1">
+                <Label>Heading 1 / Page Title</Label>
+                <Heading1>The Cinematic Developer Experience</Heading1>
+              </div>
+              <Divider variant="subtle" />
+              <div className="space-y-1">
+                <Label>Heading 2 / Section Title</Label>
+                <Heading2>Engineered for High-End Interaction</Heading2>
+              </div>
+              <Divider variant="subtle" />
+              <div className="space-y-1">
+                <Label>Heading 3 / Subtitle</Label>
+                <Heading3>Structured Modular Components</Heading3>
+              </div>
+              <Divider variant="subtle" />
+              <div className="space-y-1">
+                <Label>Heading 4 / Card Title</Label>
+                <Heading4>Interactive Surface Elevation</Heading4>
+              </div>
+              <Divider variant="subtle" />
+              <div className="space-y-1">
+                <Label>Body Paragraph & Code</Label>
+                <Paragraph>
+                  Typography prioritizes contrast, responsive scaling, and clean tracking. Code snippets like{" "}
+                  <CodeText>framer-motion</CodeText> and <CodeText>tailwindcss</CodeText> match the terminal aesthetic.
+                </Paragraph>
+              </div>
             </Surface>
+          </section>
 
-            <Surface elevation="glass" padding="md" className="space-y-2">
-              <Label>Glass Surface</Label>
-              <Paragraph className="text-xs text-neutral-400">
-                Backdrop blur & translucency
-              </Paragraph>
-              <CodeText>rgba(255,255,255,0.03)</CodeText>
-            </Surface>
+          <Divider variant="subtle" className="my-10" />
 
-            <Surface
-              elevation="subtle"
-              padding="md"
-              className="space-y-2 border-[var(--accent)]/30 bg-[var(--accent-subtle)]"
-            >
-              <Label className="text-[var(--accent)]">Brand Accent</Label>
-              <Paragraph className="text-xs text-neutral-300">
-                Cinematic Crimson (`--accent`)
-              </Paragraph>
-              <CodeText>#e50926</CodeText>
-            </Surface>
-          </div>
-        </section>
-
-        <Divider variant="subtle" className="my-10" />
-
-        {/* Section 2: Typography Hierarchy */}
-        <section className="space-y-6 my-12" aria-labelledby="section-typography">
-          <div className="flex items-center gap-2.5">
-            <Type className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
-            <Heading2 id="section-typography">Typography Hierarchy</Heading2>
-          </div>
-          <Muted>
-            Proportional scale engineered for readability, high hierarchy, and responsiveness.
-          </Muted>
-
-          <Surface elevation="subtle" padding="lg" className="space-y-6">
-            <div className="space-y-1">
-              <Label>Heading 1 / Page Title</Label>
-              <Heading1>The Cinematic Developer Experience</Heading1>
+          {/* Section 4: Button & Interaction Primitives */}
+          <section className="space-y-6 my-12" aria-labelledby="section-buttons">
+            <div className="flex items-center gap-2.5">
+              <Play className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
+              <Heading2 id="section-buttons">Button & Interaction Primitives</Heading2>
             </div>
-            <Divider variant="subtle" />
-            <div className="space-y-1">
-              <Label>Heading 2 / Section Title</Label>
-              <Heading2>Engineered for High-End Interaction</Heading2>
+            <Muted>
+              Accessible, keyboard-navigable buttons with focus rings, hover depth, and loading states.
+            </Muted>
+
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center gap-3">
+                <Button variant="accent" leftIcon={<Sparkles className="h-4 w-4" />}>
+                  Accent Action
+                </Button>
+                <Button variant="primary" rightIcon={<ArrowRight className="h-4 w-4" />}>
+                  Primary Action
+                </Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="outline">Outline</Button>
+                <Button variant="ghost">Ghost</Button>
+                <Button variant="danger">Danger</Button>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <Label className="mr-2">Sizes:</Label>
+                <Button size="sm" variant="accent">
+                  Small (sm)
+                </Button>
+                <Button size="md" variant="accent">
+                  Medium (md)
+                </Button>
+                <Button size="lg" variant="accent">
+                  Large (lg)
+                </Button>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <Label className="mr-2">States:</Label>
+                <Button variant="accent" isLoading>
+                  Loading State
+                </Button>
+                <Button variant="secondary" disabled>
+                  Disabled
+                </Button>
+                <IconButton aria-label="View Code" variant="outline" size="md">
+                  <Code2 className="h-4 w-4" />
+                </IconButton>
+                <IconButton aria-label="Preview" variant="accent" size="md">
+                  <Eye className="h-4 w-4" />
+                </IconButton>
+              </div>
             </div>
-            <Divider variant="subtle" />
-            <div className="space-y-1">
-              <Label>Heading 3 / Subtitle</Label>
-              <Heading3>Structured Modular Components</Heading3>
+          </section>
+
+          <Divider variant="subtle" className="my-10" />
+
+          {/* Section 5: Badges & Semantic Status */}
+          <section className="space-y-6 my-12" aria-labelledby="section-badges">
+            <div className="flex items-center gap-2.5">
+              <CheckCircle2 className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
+              <Heading2 id="section-badges">Badges & Status Tokens</Heading2>
             </div>
-            <Divider variant="subtle" />
-            <div className="space-y-1">
-              <Label>Heading 4 / Card Title</Label>
-              <Heading4>Interactive Surface Elevation</Heading4>
+            <Muted>
+              Compact indicators for technology tags, status signals, and metadata.
+            </Muted>
+
+            <div className="flex flex-wrap gap-2.5">
+              <Badge variant="accent">Accent</Badge>
+              <Badge variant="default">Default</Badge>
+              <Badge variant="outline">Outline</Badge>
+              <Badge variant="success">Success</Badge>
+              <Badge variant="warning">Warning</Badge>
+              <Badge variant="danger">Danger</Badge>
+              <Badge variant="neutral">Neutral</Badge>
+              <Badge variant="subtle">Subtle</Badge>
             </div>
-            <Divider variant="subtle" />
-            <div className="space-y-1">
-              <Label>Body Paragraph & Code</Label>
-              <Paragraph>
-                Typography prioritizes contrast, responsive scaling, and clean tracking. Code snippets like{" "}
-                <CodeText>framer-motion</CodeText> and <CodeText>tailwindcss</CodeText> match the terminal aesthetic.
-              </Paragraph>
+          </section>
+
+          <Divider variant="subtle" className="my-10" />
+
+          {/* Section 6: Interactive Surfaces & Depth */}
+          <section className="space-y-6 my-12" aria-labelledby="section-surfaces">
+            <div className="flex items-center gap-2.5">
+              <Layers className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
+              <Heading2 id="section-surfaces">Surfaces & Interactive Depth</Heading2>
             </div>
-          </Surface>
-        </section>
+            <Muted>
+              Cards and panels provide depth through subtle borders, background levels, and micro-hover states.
+            </Muted>
 
-        <Divider variant="subtle" className="my-10" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <Surface elevation="base" isInteractive padding="lg" className="space-y-3">
+                <Badge variant="neutral">Base Surface</Badge>
+                <Heading4>Subtle Interactive Card</Heading4>
+                <Paragraph className="text-xs text-neutral-400">
+                  Hover to see subtle border illumination and elevation shift.
+                </Paragraph>
+              </Surface>
 
-        {/* Section 3: Button & Interaction Primitives */}
-        <section className="space-y-6 my-12" aria-labelledby="section-buttons">
-          <div className="flex items-center gap-2.5">
-            <Sparkles className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
-            <Heading2 id="section-buttons">Button & Interaction Primitives</Heading2>
-          </div>
-          <Muted>
-            Accessible, keyboard-navigable buttons with focus rings, hover depth, and loading states.
-          </Muted>
+              <Surface elevation="elevated" isInteractive padding="lg" className="space-y-3">
+                <Badge variant="accent">Elevated Surface</Badge>
+                <Heading4>Elevated Depth Card</Heading4>
+                <Paragraph className="text-xs text-neutral-400">
+                  High-contrast container for spotlight and primary grouping.
+                </Paragraph>
+              </Surface>
 
-          <div className="space-y-6">
-            <div className="flex flex-wrap items-center gap-3">
-              <Button variant="accent" leftIcon={<Sparkles className="h-4 w-4" />}>
-                Accent Action
-              </Button>
-              <Button variant="primary" rightIcon={<ArrowRight className="h-4 w-4" />}>
-                Primary Action
-              </Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="outline">Outline</Button>
-              <Button variant="ghost">Ghost</Button>
-              <Button variant="danger">Danger</Button>
+              <Surface elevation="glass" isInteractive padding="lg" className="space-y-3">
+                <Badge variant="subtle">Glass Surface</Badge>
+                <Heading4>Backdrop Glass Card</Heading4>
+                <Paragraph className="text-xs text-neutral-400">
+                  Translucent overlay for floating panels and contextual popovers.
+                </Paragraph>
+              </Surface>
             </div>
+          </section>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <Label className="mr-2">Sizes:</Label>
-              <Button size="sm" variant="accent">
-                Small (sm)
-              </Button>
-              <Button size="md" variant="accent">
-                Medium (md)
-              </Button>
-              <Button size="lg" variant="accent">
-                Large (lg)
-              </Button>
-            </div>
+          <Divider variant="gradient" className="my-12" />
 
-            <div className="flex flex-wrap items-center gap-3">
-              <Label className="mr-2">States:</Label>
-              <Button variant="accent" isLoading>
-                Loading State
-              </Button>
-              <Button variant="secondary" disabled>
-                Disabled
-              </Button>
-              <IconButton aria-label="View Code" variant="outline" size="md">
-                <Code2 className="h-4 w-4" />
-              </IconButton>
-              <IconButton aria-label="Preview" variant="accent" size="md">
-                <Eye className="h-4 w-4" />
-              </IconButton>
-            </div>
-          </div>
-        </section>
-
-        <Divider variant="subtle" className="my-10" />
-
-        {/* Section 4: Badges & Semantic Status */}
-        <section className="space-y-6 my-12" aria-labelledby="section-badges">
-          <div className="flex items-center gap-2.5">
-            <CheckCircle2 className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
-            <Heading2 id="section-badges">Badges & Status Tokens</Heading2>
-          </div>
-          <Muted>
-            Compact indicators for technology tags, status signals, and metadata.
-          </Muted>
-
-          <div className="flex flex-wrap gap-2.5">
-            <Badge variant="accent">Accent</Badge>
-            <Badge variant="default">Default</Badge>
-            <Badge variant="outline">Outline</Badge>
-            <Badge variant="success">Success</Badge>
-            <Badge variant="warning">Warning</Badge>
-            <Badge variant="danger">Danger</Badge>
-            <Badge variant="neutral">Neutral</Badge>
-            <Badge variant="subtle">Subtle</Badge>
-          </div>
-        </section>
-
-        <Divider variant="subtle" className="my-10" />
-
-        {/* Section 5: Interactive Surfaces & Depth */}
-        <section className="space-y-6 my-12" aria-labelledby="section-surfaces">
-          <div className="flex items-center gap-2.5">
-            <Layers className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
-            <Heading2 id="section-surfaces">Surfaces & Interactive Depth</Heading2>
-          </div>
-          <Muted>
-            Cards and panels provide depth through subtle borders, background levels, and micro-hover states.
-          </Muted>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <Surface elevation="base" isInteractive padding="lg" className="space-y-3">
-              <Badge variant="neutral">Base Surface</Badge>
-              <Heading4>Subtle Interactive Card</Heading4>
-              <Paragraph className="text-xs text-neutral-400">
-                Hover to see subtle border illumination and elevation shift.
-              </Paragraph>
-            </Surface>
-
-            <Surface elevation="elevated" isInteractive padding="lg" className="space-y-3">
-              <Badge variant="accent">Elevated Surface</Badge>
-              <Heading4>Elevated Depth Card</Heading4>
-              <Paragraph className="text-xs text-neutral-400">
-                High-contrast container for spotlight and primary grouping.
-              </Paragraph>
-            </Surface>
-
-            <Surface elevation="glass" isInteractive padding="lg" className="space-y-3">
-              <Badge variant="subtle">Glass Surface</Badge>
-              <Heading4>Backdrop Glass Card</Heading4>
-              <Paragraph className="text-xs text-neutral-400">
-                Translucent overlay for floating panels and contextual popovers.
-              </Paragraph>
-            </Surface>
-          </div>
-        </section>
-
-        <Divider variant="gradient" className="my-12" />
-
-        {/* Footer info */}
-        <footer className="text-center py-6 text-neutral-500 text-xs">
-          PRATHAMFLIX — Phase 2 Design System Verification • Ready for Review
-        </footer>
-      </Container>
-    </main>
+          {/* Footer info */}
+          <footer className="text-center py-6 text-neutral-500 text-xs">
+            PRATHAMFLIX — Phase 3 Brand & Cinematic Intro Verification • Ready for Review
+          </footer>
+        </Container>
+      </main>
+    </>
   );
 }
