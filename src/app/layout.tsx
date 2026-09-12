@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PRATHAMFLIX — Design System & Visual Foundation",
-  description: "PRATHAMFLIX — A premium developer portfolio inspired by modern streaming platform UX.",
+  title: "PRATHAMFLIX — Developer Portfolio Platform",
+  description: "PRATHAMFLIX — A premium developer portfolio universe inspired by modern streaming platform UX.",
 };
 
 export const viewport: Viewport = {

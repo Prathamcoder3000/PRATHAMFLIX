@@ -7,3 +7,4 @@ export * from "./brand";
 export * from "./intro";
 export * from "./navigation";
 export * from "./shell";
+export * from "./hero";
