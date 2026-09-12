@@ -10,4 +10,6 @@ export * from "./hero";
 export * from "./shell";
 export * from "./content-row";
 export * from "./project-card";
+export * from "./project-preview";
+
 

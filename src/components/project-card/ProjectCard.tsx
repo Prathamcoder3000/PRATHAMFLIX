@@ -9,18 +9,20 @@ import type { ProjectCardData, ProjectCardVariant } from "@/types";
 export interface ProjectCardProps {
   project: ProjectCardData;
   variant?: ProjectCardVariant;
+  onSelect?: (project: ProjectCardData, e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   variant = "default",
+  onSelect,
   className = "",
 }) => {
   const isFeatured = variant === "featured" || Boolean(project.featured);
 
   const containerClasses = `
-    group relative flex flex-col shrink-0
+    group relative flex flex-col shrink-0 text-left
     w-[240px] sm:w-[260px] md:w-[280px] lg:w-[300px]
     rounded-xl overflow-hidden
     bg-[#0e1017] border border-white/8
@@ -33,7 +35,23 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     ${className}
   `.trim();
 
-  // If a valid href is provided, render semantic accessible Link
+  // Mode 1: Interactive Preview Trigger (Semantic Button)
+  if (onSelect) {
+    return (
+      <button
+        type="button"
+        onClick={(e) => onSelect(project, e)}
+        aria-haspopup="dialog"
+        aria-label={`Open preview for ${project.title}`}
+        className={`cursor-pointer ${containerClasses}`}
+      >
+        <ProjectCardMedia project={project} />
+        <ProjectCardContent project={project} />
+      </button>
+    );
+  }
+
+  // Mode 2: Direct Destination Link (Semantic Link)
   if (project.href) {
     return (
       <Link
@@ -47,7 +65,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     );
   }
 
-  // If no href is supplied, render semantic article (non-interactive container)
+  // Mode 3: Non-Interactive Display (Semantic Article)
   return (
     <article
       aria-label={`Project: ${project.title}`}
@@ -58,3 +76,4 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     </article>
   );
 };
+

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   AppShell,
   CinematicIntro,
@@ -13,9 +13,11 @@ import {
   Badge,
   ContentRow,
   ProjectCard,
+  ProjectPreview,
 } from "@/components";
 import { featuredProjects, systemsProjects, experimentsProjects } from "@/data/projects";
 import { useIntroState } from "@/hooks";
+import type { ProjectCardData } from "@/types";
 import { Sparkles, Compass, ShieldCheck } from "lucide-react";
 
 export default function HomePage() {
@@ -26,6 +28,16 @@ export default function HomePage() {
     completeIntro,
     replayIntro,
   } = useIntroState();
+
+  const [selectedProject, setSelectedProject] = useState<ProjectCardData | null>(null);
+
+  const handleSelectProject = (project: ProjectCardData) => {
+    setSelectedProject(project);
+  };
+
+  const handleClosePreview = () => {
+    setSelectedProject(null);
+  };
 
   return (
     <>
@@ -46,7 +58,7 @@ export default function HomePage() {
           onReplayIntro={replayIntro}
         />
 
-        {/* Phase 6 & 7: Streaming-Style Content Rows with Project Cards */}
+        {/* Phase 6, 7 & 8: Streaming-Style Content Rows with Interactive Project Cards & Previews */}
         <div className="py-4 sm:py-6 space-y-6">
           <ContentRow
             title="Featured Work"
@@ -54,7 +66,11 @@ export default function HomePage() {
             seeAllHref="/projects"
           >
             {featuredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onSelect={handleSelectProject}
+              />
             ))}
           </ContentRow>
 
@@ -64,7 +80,11 @@ export default function HomePage() {
             seeAllHref="/projects?category=systems"
           >
             {systemsProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onSelect={handleSelectProject}
+              />
             ))}
           </ContentRow>
 
@@ -74,10 +94,21 @@ export default function HomePage() {
             seeAllHref="/projects?category=experiments"
           >
             {experimentsProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onSelect={handleSelectProject}
+              />
             ))}
           </ContentRow>
         </div>
+
+        {/* Phase 8: Project Preview Dialog */}
+        <ProjectPreview
+          project={selectedProject}
+          isOpen={Boolean(selectedProject)}
+          onClose={handleClosePreview}
+        />
 
         {/* Section Below Hero: Welcome & Architecture Overview */}
         <section className="py-12 sm:py-16 md:py-20 relative z-10">
