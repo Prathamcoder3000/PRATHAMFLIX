@@ -2,4 +2,4 @@
  * Reusable components entry point
  */
 
-export {};
+export * from "./ui";

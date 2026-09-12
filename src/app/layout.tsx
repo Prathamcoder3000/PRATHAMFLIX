@@ -1,9 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PRATHAMFLIX",
-  description: "PRATHAMFLIX — Developer Portfolio Platform Foundation",
+  title: "PRATHAMFLIX — Design System & Visual Foundation",
+  description: "PRATHAMFLIX — A premium developer portfolio inspired by modern streaming platform UX.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#08090d",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -12,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="bg-neutral-950 text-neutral-100 antialiased selection:bg-red-600 selection:text-white">
+    <html lang="en" className="dark">
+      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased">
         {children}
       </body>
     </html>
