@@ -12,8 +12,9 @@ import {
   Paragraph,
   Badge,
   ContentRow,
-  ContentRowPlaceholderCard,
+  ProjectCard,
 } from "@/components";
+import { featuredProjects, systemsProjects, experimentsProjects } from "@/data/projects";
 import { useIntroState } from "@/hooks";
 import { Sparkles, Compass, ShieldCheck } from "lucide-react";
 
@@ -25,10 +26,6 @@ export default function HomePage() {
     completeIntro,
     replayIntro,
   } = useIntroState();
-
-  const placeholderItemsRow1 = Array.from({ length: 8 }, (_, i) => i + 1);
-  const placeholderItemsRow2 = Array.from({ length: 7 }, (_, i) => i + 1);
-  const placeholderItemsRow3 = Array.from({ length: 6 }, (_, i) => i + 1);
 
   return (
     <>
@@ -49,15 +46,15 @@ export default function HomePage() {
           onReplayIntro={replayIntro}
         />
 
-        {/* Phase 6: Structural Demonstration Rows */}
-        <div className="py-4 sm:py-6 space-y-4">
+        {/* Phase 6 & 7: Streaming-Style Content Rows with Project Cards */}
+        <div className="py-4 sm:py-6 space-y-6">
           <ContentRow
             title="Featured Work"
             subtitle="Curated structural showcase of engineering systems"
             seeAllHref="/projects"
           >
-            {placeholderItemsRow1.map((id) => (
-              <ContentRowPlaceholderCard key={`featured-${id}`} id={id} category="Featured" />
+            {featuredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))}
           </ContentRow>
 
@@ -66,8 +63,8 @@ export default function HomePage() {
             subtitle="Full-stack web apps, cloud services, and real-time tools"
             seeAllHref="/projects?category=systems"
           >
-            {placeholderItemsRow2.map((id) => (
-              <ContentRowPlaceholderCard key={`systems-${id}`} id={id} category="System" />
+            {systemsProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))}
           </ContentRow>
 
@@ -76,8 +73,8 @@ export default function HomePage() {
             subtitle="Artificial intelligence, machine learning, and creative code"
             seeAllHref="/projects?category=experiments"
           >
-            {placeholderItemsRow3.map((id) => (
-              <ContentRowPlaceholderCard key={`experiments-${id}`} id={id} category="Experiment" />
+            {experimentsProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))}
           </ContentRow>
         </div>

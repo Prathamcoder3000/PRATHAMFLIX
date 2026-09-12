@@ -9,3 +9,5 @@ export * from "./intro";
 export * from "./hero";
 export * from "./shell";
 export * from "./content-row";
+export * from "./project-card";
+
