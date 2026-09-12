@@ -11,5 +11,7 @@ export * from "./shell";
 export * from "./content-row";
 export * from "./project-card";
 export * from "./project-preview";
+export * from "./project-detail";
+
 
 

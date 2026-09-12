@@ -31,6 +31,7 @@ export const ProjectPreviewActions: React.FC<ProjectPreviewActionsProps> = ({
       {project.href && (
         <Link
           href={project.href}
+          onClick={onClose}
           className="inline-flex items-center justify-center font-semibold transition-colors select-none bg-[var(--accent)] text-[var(--accent-foreground)] hover:bg-[var(--accent-hover)] active:bg-[var(--accent-active)] shadow-sm rounded-lg h-10 px-4 text-sm gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
         >
           <span>View Project</span>
