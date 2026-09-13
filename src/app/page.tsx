@@ -21,6 +21,7 @@ import {
   PortfolioPreviewSection,
   CertificationPreviewSection,
   GitHubPreviewSection,
+  ContactPreviewSection,
 } from "@/components";
 import {
   featuredProjects,
@@ -185,6 +186,9 @@ export default function HomePage() {
 
         {/* Phase 18: GitHub & Open Source Preview */}
         <GitHubPreviewSection />
+
+        {/* Phase 19: Contact System & Direct Outreach CTA */}
+        <ContactPreviewSection />
 
         {/* Phase 8: Project Preview Dialog */}
         <ProjectPreview

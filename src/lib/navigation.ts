@@ -6,6 +6,7 @@ import {
   FileText,
   Bookmark,
   User,
+  Mail,
 } from "lucide-react";
 import type { NavItem } from "@/types/navigation";
 
@@ -39,6 +40,11 @@ export const PRIMARY_NAV_ITEMS: NavItem[] = [
     label: "Resume",
     href: "/resume",
     icon: FileText,
+  },
+  {
+    label: "Contact",
+    href: "/contact",
+    icon: Mail,
   },
   {
     label: "My List",
