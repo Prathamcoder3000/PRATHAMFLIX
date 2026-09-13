@@ -19,6 +19,8 @@ export * from "./search";
 export * from "./profile";
 export * from "./developer-terminal";
 export * from "./developer";
+export * from "./portfolio";
+export * from "./career";
 
 
 

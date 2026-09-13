@@ -18,6 +18,7 @@ import {
   MobileShowcase,
   AIShowcase,
   DeveloperExperienceSection,
+  PortfolioPreviewSection,
 } from "@/components";
 import {
   featuredProjects,
@@ -173,6 +174,9 @@ export default function HomePage() {
 
         {/* Phase 15: Developer Experience, Currently Building & System Telemetry */}
         <DeveloperExperienceSection />
+
+        {/* Phase 16: Career & Identity Preview */}
+        <PortfolioPreviewSection />
 
         {/* Phase 8: Project Preview Dialog */}
         <ProjectPreview

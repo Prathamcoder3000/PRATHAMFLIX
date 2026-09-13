@@ -5,6 +5,7 @@ import {
   Trophy,
   FileText,
   Bookmark,
+  User,
 } from "lucide-react";
 import type { NavItem } from "@/types/navigation";
 
@@ -18,6 +19,11 @@ export const PRIMARY_NAV_ITEMS: NavItem[] = [
     label: "Projects",
     href: "/projects",
     icon: FolderGit2,
+  },
+  {
+    label: "About",
+    href: "/about",
+    icon: User,
   },
   {
     label: "Skills",
