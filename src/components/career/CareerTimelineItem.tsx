@@ -46,8 +46,8 @@ export const CareerTimelineItem: React.FC<CareerTimelineItemProps> = ({
         <div
           className={`h-10 w-10 sm:h-12 sm:w-12 rounded-xl flex items-center justify-center border transition-all duration-300 z-10 ${
             entry.isCurrent
-              ? "bg-[var(--accent)]/15 border-[var(--accent)] text-[var(--accent)] shadow-lg shadow-[var(--accent)]/20"
-              : "bg-neutral-900 border-white/10 text-neutral-400 group-hover:border-[var(--accent)]/50 group-hover:text-white"
+              ? "bg-red-500/15 border-red-500 text-red-500 shadow-[0_0_15px_rgba(229,9,20,0.35)]"
+              : "bg-neutral-900 border-white/10 text-neutral-400 group-hover:border-red-500/50 group-hover:text-white group-hover:shadow-[0_0_12px_rgba(229,9,20,0.2)]"
           }`}
         >
           <IconComponent className="h-5 w-5" />
@@ -61,7 +61,7 @@ export const CareerTimelineItem: React.FC<CareerTimelineItemProps> = ({
 
       {/* Content Card */}
       <div className="flex-1 pb-8">
-        <div className="rounded-xl border border-white/10 bg-neutral-950/60 p-5 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-white/20 group-hover:bg-neutral-900/40">
+        <div className="rounded-xl border border-white/10 bg-neutral-950/60 p-5 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-white/20 group-hover:bg-neutral-900/40 transform group-hover:-translate-y-0.5">
           {/* Header row: Period & Category */}
           <div className="flex flex-wrap items-center justify-between gap-2 pb-2">
             <div className="flex items-center gap-1.5 text-xs font-mono font-medium text-[var(--accent)]">
@@ -71,7 +71,8 @@ export const CareerTimelineItem: React.FC<CareerTimelineItemProps> = ({
 
             <div className="flex items-center gap-2">
               {entry.isCurrent && (
-                <Badge variant="accent" size="sm" className="text-[10px]">
+                <Badge variant="accent" size="sm" className="text-[10px] flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
                   Current Focus
                 </Badge>
               )}
@@ -102,7 +103,7 @@ export const CareerTimelineItem: React.FC<CareerTimelineItemProps> = ({
               {entry.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-neutral-300 border border-white/5"
+                  className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-neutral-300 border border-white/5 group-hover:border-white/10"
                 >
                   {tech}
                 </span>

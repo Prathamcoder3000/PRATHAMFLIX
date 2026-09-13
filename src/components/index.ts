@@ -26,6 +26,10 @@ export * from "./resume";
 export * from "./github";
 export * from "./contact";
 export * from "./ai-assistant";
+export * from "./cinema";
+export * from "./transitions";
+export * from "./shortcuts";
+export * from "./easter-eggs";
 
 
 

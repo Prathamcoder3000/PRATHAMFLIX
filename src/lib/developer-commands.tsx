@@ -20,6 +20,8 @@ export const TERMINAL_COMMANDS: Record<string, TerminalCommandDef> = {
           <div><span className="text-[var(--accent)] font-bold">whoami</span> - Display active profile identity</div>
           <div><span className="text-[var(--accent)] font-bold">ask &lt;q&gt;</span> - Query PRATHAMFLIX AI Assistant</div>
           <div><span className="text-[var(--accent)] font-bold">status</span> - System engine health & state</div>
+          <div><span className="text-[var(--accent)] font-bold">cinema</span> - Toggle Cinema presentation mode</div>
+          <div><span className="text-[var(--accent)] font-bold">shortcuts</span> - Display keyboard shortcuts</div>
           <div><span className="text-[var(--accent)] font-bold">switch</span> - Switch profile (pratham/recruiter)</div>
           <div><span className="text-[var(--accent)] font-bold">contact</span> - Contact & profile channels</div>
           <div><span className="text-[var(--accent)] font-bold">theme</span> - Cinematic UI design tokens</div>
@@ -262,15 +264,63 @@ export const TERMINAL_COMMANDS: Record<string, TerminalCommandDef> = {
     ),
   },
 
+  cinema: {
+    command: "cinema",
+    description: "Toggle cinematic presentation mode",
+    aliases: ["theater", "zen"],
+    handler: () => {
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("prathamflix_cinema_mode_change"));
+      }
+      return (
+        <div className="space-y-1 font-mono text-xs text-red-400">
+          <p className="font-bold">✦ Cinema Mode Toggled</p>
+          <p className="text-neutral-400 text-[11px]">
+            Press <code className="text-white">Esc</code> or use the top HUD to exit.
+          </p>
+        </div>
+      );
+    },
+  },
+
+  shortcuts: {
+    command: "shortcuts",
+    description: "Display global keyboard shortcuts reference",
+    aliases: ["keys", "keybindings"],
+    handler: () => {
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("prathamflix_open_shortcuts"));
+      }
+      return (
+        <p className="font-mono text-xs text-emerald-400">
+          ✦ Opening Keyboard Shortcuts Reference modal...
+        </p>
+      );
+    },
+  },
+
   easteregg: {
     command: "easteregg",
     description: "A secret message from the engineer",
-    aliases: ["matrix", "secret"],
+    aliases: ["secret"],
     handler: () => (
       <div className="space-y-1 font-mono text-xs text-purple-300">
         <p className="font-bold">✨ You discovered an easter egg!</p>
         <p className="text-neutral-400 text-[11px]">
           &quot;Any sufficiently advanced technology is indistinguishable from magic.&quot; — Arthur C. Clarke
+        </p>
+      </div>
+    ),
+  },
+
+  matrix: {
+    command: "matrix",
+    description: "Simulate matrix terminal stream",
+    handler: () => (
+      <div className="space-y-1 font-mono text-xs text-emerald-400">
+        <p className="font-bold text-white">01010000 01010010 01000001 01010100 01001000 01000001 01001101</p>
+        <p className="text-emerald-500 text-[11px]">
+          [OK] Architecture Pipeline Synchronized &bull; PRATHAMFLIX Core Live
         </p>
       </div>
     ),

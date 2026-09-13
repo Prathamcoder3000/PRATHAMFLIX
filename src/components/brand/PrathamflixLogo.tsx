@@ -1,10 +1,13 @@
-import React from "react";
+"use client";
+
+import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 export interface PrathamflixLogoProps {
   size?: "sm" | "md" | "lg" | "xl" | "hero";
   showWordmark?: boolean;
   className?: string;
+  enableEasterEgg?: boolean;
 }
 
 const sizeConfig = {
@@ -39,14 +42,37 @@ export function PrathamflixLogo({
   size = "md",
   showWordmark = true,
   className,
+  enableEasterEgg = true,
 }: PrathamflixLogoProps) {
   const current = sizeConfig[size];
+  const [isSparking, setIsSparking] = useState(false);
+  const clickCountRef = useRef(0);
+  const clickTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleLogoClick = () => {
+    if (!enableEasterEgg) return;
+
+    clickCountRef.current += 1;
+    if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
+
+    if (clickCountRef.current >= 5) {
+      clickCountRef.current = 0;
+      setIsSparking(true);
+      setTimeout(() => setIsSparking(false), 2500);
+    } else {
+      clickTimerRef.current = setTimeout(() => {
+        clickCountRef.current = 0;
+      }, 2500);
+    }
+  };
 
   return (
     <div
+      onClick={handleLogoClick}
       className={cn(
-        "inline-flex items-center select-none font-sans font-black",
+        "inline-flex items-center select-none font-sans font-black relative cursor-pointer",
         current.gap,
+        isSparking && "scale-105 transition-transform duration-300",
         className
       )}
       aria-label="PRATHAMFLIX"
@@ -58,7 +84,10 @@ export function PrathamflixLogo({
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="shrink-0 drop-shadow-[0_0_16px_rgba(229,9,38,0.35)]"
+        className={cn(
+          "shrink-0 drop-shadow-[0_0_16px_rgba(229,9,38,0.35)] transition-transform duration-300",
+          isSparking && "animate-spin"
+        )}
         aria-hidden="true"
       >
         <defs>
@@ -114,6 +143,13 @@ export function PrathamflixLogo({
           <span className="text-[var(--accent)] bg-gradient-to-r from-[#ff334b] via-[#e50926] to-[#b3071d] bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(229,9,38,0.5)]">
             FLIX
           </span>
+        </span>
+      )}
+
+      {/* Easter Egg Sparkle Badge */}
+      {isSparking && (
+        <span className="absolute -top-7 left-0 px-2 py-0.5 rounded bg-red-600 text-[10px] font-mono font-bold text-white shadow-lg animate-bounce z-50 whitespace-nowrap">
+          ✦ PRATHAMFLIX Core Engine v1.0.0
         </span>
       )}
     </div>
