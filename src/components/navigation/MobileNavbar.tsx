@@ -29,20 +29,20 @@ export function MobileNavbar({
       {/* Brand Logo */}
       <Link
         href="/"
-        className="shrink-0 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-md"
+        className="shrink-0 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-md py-1"
         aria-label="PRATHAMFLIX Home"
       >
         <PrathamflixLogo size="sm" />
       </Link>
 
-      {/* Right Controls */}
-      <div className="flex items-center gap-1.5 sm:gap-2">
+      {/* Right Controls with 44px+ touch targets */}
+      <div className="flex items-center gap-1">
         {/* Search Entry */}
         <button
           type="button"
           onClick={onSearchClick}
           className={cn(
-            "inline-flex items-center justify-center h-10 w-10 rounded-full text-neutral-300 hover:text-white hover:bg-white/10 active:bg-white/15 transition-colors",
+            "inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full text-neutral-300 hover:text-white hover:bg-white/10 active:bg-white/15 transition-colors cursor-pointer",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
           )}
           aria-label="Search"
@@ -55,7 +55,7 @@ export function MobileNavbar({
           type="button"
           onClick={onRecruiterClick}
           className={cn(
-            "inline-flex items-center justify-center h-10 w-10 rounded-full text-neutral-300 hover:text-white hover:bg-white/10 active:bg-white/15 transition-colors",
+            "inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full text-neutral-300 hover:text-white hover:bg-white/10 active:bg-white/15 transition-colors cursor-pointer",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
           )}
           aria-label="Recruiter Mode"
@@ -69,7 +69,7 @@ export function MobileNavbar({
           type="button"
           onClick={onToggleMenu}
           className={cn(
-            "inline-flex items-center justify-center h-10 w-10 rounded-lg text-neutral-200 hover:text-white bg-white/5 hover:bg-white/10 active:bg-white/15 transition-colors",
+            "inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-lg text-neutral-200 hover:text-white bg-white/5 hover:bg-white/10 active:bg-white/15 transition-colors cursor-pointer",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
           )}
           aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}

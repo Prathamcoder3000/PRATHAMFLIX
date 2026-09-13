@@ -88,7 +88,7 @@ export function MobileMenu({
                 type="button"
                 onClick={onClose}
                 className={cn(
-                  "inline-flex items-center justify-center h-10 w-10 rounded-full text-neutral-300 hover:text-white bg-white/5 hover:bg-white/10 transition-colors",
+                  "inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full text-neutral-300 hover:text-white bg-white/5 hover:bg-white/10 transition-colors cursor-pointer",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
                 )}
                 aria-label="Close navigation menu"

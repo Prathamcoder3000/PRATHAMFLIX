@@ -234,7 +234,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               aria-invalid={Boolean(errors.name)}
               aria-describedby={errors.name ? "name-error" : undefined}
               disabled={isSubmitting}
-              className={`w-full px-4 py-2.5 rounded-xl bg-neutral-900/90 border text-sm text-white placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)] font-sans ${
+              className={`w-full px-4 py-2.5 rounded-xl bg-neutral-900/90 border text-base sm:text-sm text-white placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)] font-sans ${
                 errors.name ? "border-red-500/80" : "border-white/10"
               }`}
             />
@@ -265,7 +265,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               aria-invalid={Boolean(errors.email)}
               aria-describedby={errors.email ? "email-error" : undefined}
               disabled={isSubmitting}
-              className={`w-full px-4 py-2.5 rounded-xl bg-neutral-900/90 border text-sm text-white placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)] font-sans ${
+              className={`w-full px-4 py-2.5 rounded-xl bg-neutral-900/90 border text-base sm:text-sm text-white placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)] font-sans ${
                 errors.email ? "border-red-500/80" : "border-white/10"
               }`}
             />
@@ -296,7 +296,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               disabled={isSubmitting}
               aria-invalid={Boolean(errors.reason)}
               aria-describedby={errors.reason ? "reason-error" : undefined}
-              className={`w-full px-4 py-2.5 rounded-xl bg-neutral-900/90 border text-sm text-white transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)] font-sans cursor-pointer ${
+              className={`w-full px-4 py-2.5 rounded-xl bg-neutral-900/90 border text-base sm:text-sm text-white transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)] font-sans cursor-pointer ${
                 errors.reason ? "border-red-500/80" : "border-white/10"
               }`}
             >
@@ -330,7 +330,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               onChange={handleChange}
               placeholder="e.g. TechCorp / University"
               disabled={isSubmitting}
-              className="w-full px-4 py-2.5 rounded-xl bg-neutral-900/90 border border-white/10 text-sm text-white placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)] font-sans"
+              className="w-full px-4 py-2.5 rounded-xl bg-neutral-900/90 border border-white/10 text-base sm:text-sm text-white placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)] font-sans"
             />
           </div>
         </div>
@@ -360,7 +360,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             aria-invalid={Boolean(errors.message)}
             aria-describedby={errors.message ? "message-error" : undefined}
             disabled={isSubmitting}
-            className={`w-full px-4 py-3 rounded-xl bg-neutral-900/90 border text-sm text-white placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)] resize-y font-sans leading-relaxed ${
+            className={`w-full px-4 py-3 rounded-xl bg-neutral-900/90 border text-base sm:text-sm text-white placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)] resize-y font-sans leading-relaxed ${
               errors.message ? "border-red-500/80" : "border-white/10"
             }`}
           />

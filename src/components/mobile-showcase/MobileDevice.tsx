@@ -31,7 +31,7 @@ export const MobileDevice: React.FC<MobileDeviceProps> = ({
 
       {/* 3. Physical Smartphone Outer Chassis */}
       <div
-        className="relative z-10 w-[270px] sm:w-[290px] md:w-[310px] aspect-[9/19.5] rounded-[42px] p-[8px] bg-gradient-to-b from-[#2a2e3d] via-[#1a1c26] to-[#12141c] border border-white/15 shadow-2xl shadow-black transition-transform duration-500 ease-out group-hover/device:-translate-y-1.5"
+        className="relative z-10 w-[250px] xs:w-[270px] sm:w-[290px] md:w-[310px] aspect-[9/19.5] rounded-[42px] p-[8px] bg-gradient-to-b from-[#2a2e3d] via-[#1a1c26] to-[#12141c] border border-white/15 shadow-2xl shadow-black transition-transform duration-500 ease-out group-hover/device:-translate-y-1.5"
         style={{
           boxShadow: `0 25px 60px -15px rgba(0,0,0,0.9), 0 0 35px -10px ${accentColor}30`,
         }}

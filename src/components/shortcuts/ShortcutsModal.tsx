@@ -126,10 +126,10 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose 
                     {group.items.map((item, itemIdx) => (
                       <div
                         key={itemIdx}
-                        className="flex items-center justify-between p-2.5 rounded-lg bg-zinc-900/60 border border-zinc-800/60"
+                        className="flex flex-col xs:flex-row xs:items-center justify-between gap-2 p-2.5 rounded-lg bg-zinc-900/60 border border-zinc-800/60"
                       >
-                        <span className="text-xs text-zinc-300">{item.description}</span>
-                        <div className="flex items-center gap-1">
+                        <span className="text-xs text-zinc-300 leading-snug">{item.description}</span>
+                        <div className="flex items-center gap-1 shrink-0">
                           {item.keys.map((k, kIdx) => (
                             <React.Fragment key={kIdx}>
                               <kbd className="px-2 py-0.5 text-[11px] font-mono font-semibold bg-zinc-800 text-zinc-200 border border-zinc-700 rounded shadow-sm">

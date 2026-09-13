@@ -50,7 +50,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         aria-label="Search projects, technologies, architectures, and skills"
         autoComplete="off"
         spellCheck="false"
-        className="w-full bg-transparent text-white placeholder:text-neutral-500 text-sm sm:text-base font-normal focus:outline-none"
+        className="w-full bg-transparent text-white placeholder:text-neutral-500 text-base font-normal focus:outline-none"
       />
 
       {/* Clear Button (when query is present) */}
