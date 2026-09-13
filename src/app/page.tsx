@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import {
   AppShell,
   CinematicIntro,
@@ -14,7 +15,6 @@ import {
   Badge,
   ContentRow,
   ProjectCard,
-  ProjectPreview,
   MobileShowcase,
   AIShowcase,
   DeveloperExperienceSection,
@@ -23,6 +23,11 @@ import {
   GitHubPreviewSection,
   ContactPreviewSection,
 } from "@/components";
+
+const ProjectPreview = dynamic(
+  () => import("@/components/project-preview/ProjectPreview").then((mod) => mod.ProjectPreview),
+  { ssr: true }
+);
 import {
   featuredProjects,
   systemsProjects,

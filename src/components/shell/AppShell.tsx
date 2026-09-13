@@ -1,17 +1,35 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Container } from "@/components/ui/Container";
-import { AIAssistantButton, AIAssistantPanel } from "@/components/ai-assistant";
-import { CinemaModeHUD } from "@/components/cinema/CinemaModeHUD";
-import { ShortcutsModal } from "@/components/shortcuts/ShortcutsModal";
-import { KonamiOverlay } from "@/components/easter-eggs/KonamiOverlay";
+import { AIAssistantButton } from "@/components/ai-assistant";
 import { useAIAssistant } from "@/hooks/useAIAssistant";
 import { useCinemaMode } from "@/hooks/useCinemaMode";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 import { cn } from "@/lib/utils";
 import type { BaseProps } from "@/types/ui";
+
+const AIAssistantPanel = dynamic(
+  () => import("@/components/ai-assistant").then((mod) => mod.AIAssistantPanel),
+  { ssr: true }
+);
+
+const ShortcutsModal = dynamic(
+  () => import("@/components/shortcuts/ShortcutsModal").then((mod) => mod.ShortcutsModal),
+  { ssr: true }
+);
+
+const CinemaModeHUD = dynamic(
+  () => import("@/components/cinema/CinemaModeHUD").then((mod) => mod.CinemaModeHUD),
+  { ssr: true }
+);
+
+const KonamiOverlay = dynamic(
+  () => import("@/components/easter-eggs/KonamiOverlay").then((mod) => mod.KonamiOverlay),
+  { ssr: false }
+);
 
 export interface AppShellProps extends BaseProps {
   children: React.ReactNode;

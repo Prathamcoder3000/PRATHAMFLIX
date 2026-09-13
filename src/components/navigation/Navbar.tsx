@@ -1,15 +1,24 @@
 "use client";
 
 import React, { useState, useCallback, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import { Container } from "@/components/ui/Container";
 import { DesktopNavbar } from "./DesktopNavbar";
 import { MobileNavbar } from "./MobileNavbar";
 import { MobileMenu } from "./MobileMenu";
-import { SearchOverlay } from "@/components/search/SearchOverlay";
-import { ProfileSwitcher } from "@/components/profile/ProfileSwitcher";
 import { useScrollState } from "@/hooks/useScrollState";
 import { useProfile } from "@/hooks/useProfile";
 import { cn } from "@/lib/utils";
+
+const SearchOverlay = dynamic(
+  () => import("@/components/search/SearchOverlay").then((mod) => mod.SearchOverlay),
+  { ssr: true }
+);
+
+const ProfileSwitcher = dynamic(
+  () => import("@/components/profile/ProfileSwitcher").then((mod) => mod.ProfileSwitcher),
+  { ssr: true }
+);
 
 export interface NavbarProps {
   className?: string;

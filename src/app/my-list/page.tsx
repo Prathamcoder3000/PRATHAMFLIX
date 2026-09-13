@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import {
   AppShell,
   Container,
@@ -9,10 +10,14 @@ import {
   Paragraph,
   Badge,
   Button,
-  ProjectPreview,
   MyListGrid,
   MyListEmptyState,
 } from "@/components";
+
+const ProjectPreview = dynamic(
+  () => import("@/components/project-preview/ProjectPreview").then((mod) => mod.ProjectPreview),
+  { ssr: true }
+);
 import { useMyList } from "@/hooks/useMyList";
 import type { ProjectCardData } from "@/types";
 import { Bookmark, Trash2, ArrowLeft, Compass } from "lucide-react";

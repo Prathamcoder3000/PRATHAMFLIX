@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Surface } from "@/components/ui/Surface";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -59,10 +60,11 @@ export const GitHubProfile: React.FC<GitHubProfileProps> = ({
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
           <div className="relative">
             {profile.avatarUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <Image
                 src={profile.avatarUrl}
                 alt={`${profile.name} GitHub Avatar`}
+                width={96}
+                height={96}
                 className="h-20 w-20 sm:h-24 sm:w-24 rounded-2xl object-cover border-2 border-white/10 shadow-lg"
               />
             ) : (

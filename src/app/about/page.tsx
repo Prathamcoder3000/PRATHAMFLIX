@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import {
   AppShell,
   Container,
@@ -13,9 +14,13 @@ import {
   DevelopmentPhilosophy,
   InterestSection,
   CareerTimeline,
-  DeveloperTerminal,
   Button,
 } from "@/components";
+
+const DeveloperTerminal = dynamic(
+  () => import("@/components/developer-terminal/DeveloperTerminal").then((mod) => mod.DeveloperTerminal),
+  { ssr: false }
+);
 import {
   getPortfolioIdentity,
   getCapabilities,

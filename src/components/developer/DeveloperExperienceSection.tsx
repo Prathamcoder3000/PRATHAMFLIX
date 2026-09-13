@@ -1,12 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { Container } from "@/components/ui/Container";
 import { CurrentlyBuilding } from "./CurrentlyBuilding";
 import { DeveloperStatus } from "./DeveloperStatus";
-import { DeveloperTerminal } from "@/components/developer-terminal/DeveloperTerminal";
 import { SectionReveal } from "@/components/transitions/SectionReveal";
 import { Code2 } from "lucide-react";
+
+const DeveloperTerminal = dynamic(
+  () => import("@/components/developer-terminal/DeveloperTerminal").then((mod) => mod.DeveloperTerminal),
+  { ssr: false }
+);
 
 export interface DeveloperExperienceSectionProps {
   className?: string;
