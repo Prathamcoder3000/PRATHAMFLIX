@@ -10,6 +10,7 @@ export interface ProjectCardData {
   featured?: boolean;
   href?: string;
   isMobile?: boolean;
+  isAI?: boolean;
 }
 
 export type ProjectCardVariant = "default" | "featured";
@@ -31,6 +32,22 @@ export interface MobileAppFeature {
   title: string;
   description: string;
   icon?: string;
+}
+
+export interface AIPipelineNode {
+  step: number | string;
+  title: string;
+  type?: "data" | "process" | "model" | "decision" | "output" | string;
+  description?: string;
+  tech?: string;
+  icon?: string;
+}
+
+export interface AIModelInfo {
+  type?: string;
+  framework?: string;
+  task?: string;
+  architectureType?: string;
 }
 
 export interface TechStackCategory {
@@ -57,6 +74,10 @@ export interface ProjectDetailData extends ProjectCardData {
   framework?: string;
   deviceOrientation?: "portrait" | "landscape";
   appFeatures?: MobileAppFeature[];
+  aiCategory?: string;
+  pipeline?: AIPipelineNode[];
+  modelInfo?: AIModelInfo;
 }
 
 export type MobileProjectData = ProjectDetailData;
+export type AIProjectData = ProjectDetailData;

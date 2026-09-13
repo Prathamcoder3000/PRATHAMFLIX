@@ -15,6 +15,7 @@ import {
   ProjectCard,
   ProjectPreview,
   MobileShowcase,
+  AIShowcase,
 } from "@/components";
 import {
   featuredProjects,
@@ -22,6 +23,8 @@ import {
   experimentsProjects,
   getMobileProjects,
   getFeaturedMobileProject,
+  getAIProjects,
+  getFeaturedAIProject,
 } from "@/data/projects";
 import { useIntroState } from "@/hooks";
 import type { ProjectCardData } from "@/types";
@@ -48,6 +51,8 @@ export default function HomePage() {
 
   const mobileProjects = getMobileProjects();
   const featuredMobile = getFeaturedMobileProject();
+  const aiProjects = getAIProjects();
+  const featuredAI = getFeaturedAIProject();
 
   return (
     <>
@@ -68,7 +73,7 @@ export default function HomePage() {
           onReplayIntro={replayIntro}
         />
 
-        {/* Phase 6, 7 & 8: Streaming-Style Content Rows with Interactive Project Cards & Previews */}
+        {/* Phase 6, 7, 8, 10, 11: Streaming-Style Content Rows & Product Showcases */}
         <div className="py-4 sm:py-6 space-y-8">
           <ContentRow
             title="Featured Work"
@@ -76,6 +81,25 @@ export default function HomePage() {
             seeAllHref="/projects"
           >
             {featuredProjects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onSelect={handleSelectProject}
+              />
+            ))}
+          </ContentRow>
+
+          {/* Phase 11: Featured AI / ML & Intelligent Systems Showcase */}
+          {featuredAI && (
+            <AIShowcase project={featuredAI} />
+          )}
+
+          <ContentRow
+            title="AI / ML & Intelligent Systems"
+            subtitle="Neural inference acceleration, multi-agent DAG orchestrators, and spatial computer vision"
+            seeAllHref="/projects?category=ai"
+          >
+            {aiProjects.map((project) => (
               <ProjectCard
                 key={project.id}
                 project={project}
@@ -131,6 +155,7 @@ export default function HomePage() {
             ))}
           </ContentRow>
         </div>
+
 
         {/* Phase 8: Project Preview Dialog */}
         <ProjectPreview

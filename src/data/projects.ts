@@ -159,6 +159,9 @@ export const featuredProjects: ProjectDetailData[] = [
     year: "2025",
     technologies: ["Python", "PyTorch", "CUDA", "TensorRT"],
     accent: "#8b5cf6",
+    featured: true,
+    isAI: true,
+    aiCategory: "Machine Learning & Acceleration",
     href: "/projects/featured-epsilon",
     overview:
       "An inference acceleration pipeline applying layer fusion, INT8 quantization, and custom CUDA tensor operations to maximize throughput for large transformer architectures.",
@@ -166,6 +169,19 @@ export const featuredProjects: ProjectDetailData[] = [
       "Deploying high-parameter models on edge and cloud instances results in prohibitive latency and extreme VRAM utilization.",
     solution:
       "Built an automated model compilation pipeline converting PyTorch graphs into optimized TensorRT engines with custom memory pooling.",
+    modelInfo: {
+      type: "Transformer TensorRT",
+      framework: "PyTorch & CUDA",
+      task: "Inference Latency Optimization",
+      architectureType: "Quantized Tensor Graph",
+    },
+    pipeline: [
+      { step: 1, title: "Input Tensors", type: "data", description: "Raw batch requests and dynamic sequence inputs", tech: "PyTorch Tensor", icon: "Database" },
+      { step: 2, title: "Graph Compiler", type: "process", description: "Kernel fusion and constant sub-tree folding", tech: "ONNX / TensorRT", icon: "Cpu" },
+      { step: 3, title: "INT8 Quantizer", type: "model", description: "Calibration-driven dynamic range scaling", tech: "CUDA Kernels", icon: "Binary" },
+      { step: 4, title: "Dynamic Batcher", type: "decision", description: "Multi-stream concurrency scheduler", tech: "Triton Engine", icon: "Boxes" },
+      { step: 5, title: "Optimized Output", type: "output", description: "Sub-millisecond accelerated inference dispatch", tech: "gRPC Stream", icon: "Zap" },
+    ],
     architecture: [
       { name: "Model Graph", role: "Definition", tech: "PyTorch & ONNX", description: "High-level neural network graph and weights" },
       { name: "Optimization Engine", role: "Compiler", tech: "TensorRT & CUDA", description: "Layer fusion, kernel auto-tuning, and quantization" },
@@ -464,6 +480,8 @@ export const experimentsProjects: ProjectDetailData[] = [
     year: "2025",
     technologies: ["Three.js", "GLSL", "WebGL", "TypeScript"],
     accent: "#ec4899",
+    isAI: true,
+    aiCategory: "Computer Vision & Spatial Rendering",
     href: "/projects/exp-omicron",
     overview:
       "An experimental browser-based rendering sandbox exploring 3D Gaussian splatting, custom GLSL volumetric shaders, and real-time spatial radiance field navigation.",
@@ -471,6 +489,19 @@ export const experimentsProjects: ProjectDetailData[] = [
       "Volumetric neural rendering typically requires heavy desktop GPUs and fails to achieve interactive frame rates in standard web browsers.",
     solution:
       "Created a custom WebGL fragment shader pipeline leveraging GPU instancing and compute-assisted tile sorting for real-time browser rendering.",
+    modelInfo: {
+      type: "Radiance Field Engine",
+      framework: "WebGL & GLSL Shaders",
+      task: "Real-Time Neural Volume Rendering",
+      architectureType: "Gaussian Radiance Splats",
+    },
+    pipeline: [
+      { step: 1, title: "Point Cloud Input", type: "data", description: "Dense 3D scene point vectors & PLY data", tech: "Binary PLY", icon: "Database" },
+      { step: 2, title: "Spatial Octree", type: "process", description: "Hierarchical bounding volume partitioning", tech: "Octree Index", icon: "Layers" },
+      { step: 3, title: "Radix GPU Sorter", type: "model", description: "Depth-ordered Gaussian sorting per camera frame", tech: "GLSL Compute", icon: "Cpu" },
+      { step: 4, title: "Alpha Blender", type: "decision", description: "Volumetric ray accumulation and shading", tech: "WebGL 2.0", icon: "Sparkles" },
+      { step: 5, title: "Interactive Viewport", type: "output", description: "60 FPS photorealistic 3D radiance field navigation", tech: "Canvas Viewport", icon: "Box" },
+    ],
     architecture: [
       { name: "WebGL Canvas", role: "Rasterization", tech: "Three.js & WebGL 2.0", description: "Hardware-accelerated viewport with camera orbit controls" },
       { name: "GLSL Shader Pipeline", role: "Volumetric Shaders", tech: "Custom GLSL", description: "Real-time Gaussian sorting and alpha accumulation" },
@@ -498,6 +529,8 @@ export const experimentsProjects: ProjectDetailData[] = [
     year: "2025",
     technologies: ["Python", "FastAPI", "LangChain", "OpenAI"],
     accent: "#8b5cf6",
+    isAI: true,
+    aiCategory: "Agentic AI & Orchestration",
     href: "/projects/exp-pi",
     overview:
       "An autonomous agent orchestration framework coordinating specialized reasoning models to break down complex multi-step technical tasks, validate intermediate outputs, and execute verified tool calls.",
@@ -505,6 +538,19 @@ export const experimentsProjects: ProjectDetailData[] = [
       "Single-prompt LLM interactions frequently hallucinate, lack domain context, and fail when executing complex chained technical objectives.",
     solution:
       "Built a directed acyclic graph (DAG) agent workflow with strict schema validation, feedback loops, and human-in-the-loop verification gates.",
+    modelInfo: {
+      type: "Autonomous Multi-Agent DAG",
+      framework: "LangGraph & Python",
+      task: "Structured Reasoning & Tool Invocation",
+      architectureType: "State Machine Agent Graph",
+    },
+    pipeline: [
+      { step: 1, title: "User Objective", type: "data", description: "Multi-step complex technical instruction prompt", tech: "Prompt Context", icon: "FileText" },
+      { step: 2, title: "Planner Node", type: "process", description: "Decomposes prompt into executable sub-task DAG", tech: "Reasoning LLM", icon: "GitFork" },
+      { step: 3, title: "Tool Execution", type: "model", description: "Sandboxed schema-validated API/script runner", tech: "Docker Runtime", icon: "Terminal" },
+      { step: 4, title: "Critic / Validator", type: "decision", description: "Self-reflection loop evaluating intermediate outputs", tech: "Evaluation Gate", icon: "CheckSquare" },
+      { step: 5, title: "Verified Synthesis", type: "output", description: "Aggregated, validated final solution delivery", tech: "Structured Output", icon: "CheckCircle" },
+    ],
     architecture: [
       { name: "Orchestrator Core", role: "Graph Controller", tech: "Python & LangGraph", description: "DAG execution engine managing agent state and transitions" },
       { name: "Specialized Agents", role: "Reasoning Nodes", tech: "GPT-4o & Claude 3.5", description: "Dedicated planning, coding, and verification agents" },
@@ -692,4 +738,28 @@ export function getFeaturedMobileProject(): ProjectDetailData {
   const mobiles = getMobileProjects();
   return mobiles[0] || featuredProjects[5];
 }
+
+/**
+ * Single source of truth query helper for AI / ML projects
+ */
+export function getAIProjects(): ProjectDetailData[] {
+  return allProjects.filter(
+    (p) =>
+      p.isAI ||
+      p.category === "AI / ML" ||
+      p.category === "AI Agent" ||
+      p.technologies?.some((t) =>
+        ["PyTorch", "TensorRT", "CUDA", "LangChain", "OpenAI", "TensorFlow", "Scikit-Learn"].includes(t)
+      )
+  );
+}
+
+/**
+ * Retrieve primary featured AI project for showcase presentation
+ */
+export function getFeaturedAIProject(): ProjectDetailData {
+  const aiProjects = getAIProjects();
+  return aiProjects.find((p) => p.id === "featured-epsilon") || aiProjects[0] || featuredProjects[4];
+}
+
 
