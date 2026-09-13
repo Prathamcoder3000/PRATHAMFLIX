@@ -6,7 +6,9 @@ import { DesktopNavbar } from "./DesktopNavbar";
 import { MobileNavbar } from "./MobileNavbar";
 import { MobileMenu } from "./MobileMenu";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
+import { ProfileSwitcher } from "@/components/profile/ProfileSwitcher";
 import { useScrollState } from "@/hooks/useScrollState";
+import { useProfile } from "@/hooks/useProfile";
 import { cn } from "@/lib/utils";
 
 export interface NavbarProps {
@@ -16,9 +18,11 @@ export interface NavbarProps {
 export function Navbar({ className }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isProfileSwitcherOpen, setIsProfileSwitcherOpen] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
   const lastActiveElementRef = useRef<HTMLElement | null>(null);
   const { isScrolled } = useScrollState(20);
+  const { profileId, switchProfile, isRecruiterMode } = useProfile();
 
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -43,6 +47,25 @@ export function Navbar({ className }: NavbarProps) {
         lastActiveElementRef.current?.focus();
       }, 50);
     }
+  }, []);
+
+  const handleRecruiterToggle = useCallback(() => {
+    const nextMode = isRecruiterMode ? "pratham" : "recruiter";
+    switchProfile(nextMode);
+    setFeedbackMessage(
+      nextMode === "recruiter"
+        ? "Switched to Recruiter Mode (Professional View)"
+        : "Switched to PRATHAM Mode (Full Portfolio)"
+    );
+    const timer = setTimeout(() => {
+      setFeedbackMessage(null);
+    }, 2400);
+    return () => clearTimeout(timer);
+  }, [isRecruiterMode, switchProfile]);
+
+  const openProfileSwitcher = useCallback(() => {
+    setIsMobileMenuOpen(false);
+    setIsProfileSwitcherOpen(true);
   }, []);
 
   // Global Keyboard Shortcuts for Search
@@ -76,15 +99,6 @@ export function Navbar({ className }: NavbarProps) {
     };
   }, [isSearchOpen, openSearch]);
 
-  // Temporary feedback toast handler for navigation entry points
-  const handleEntryClick = useCallback((featureName: string) => {
-    setFeedbackMessage(`${featureName} navigation entry verified (Phase feature)`);
-    const timer = setTimeout(() => {
-      setFeedbackMessage(null);
-    }, 2400);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <>
       <header
@@ -100,15 +114,15 @@ export function Navbar({ className }: NavbarProps) {
         <Container maxWidth="2xl">
           <DesktopNavbar
             onSearchClick={openSearch}
-            onRecruiterClick={() => handleEntryClick("Recruiter Mode")}
-            onProfileClick={() => handleEntryClick("Profile Mode")}
+            onRecruiterClick={handleRecruiterToggle}
+            onProfileClick={openProfileSwitcher}
           />
 
           <MobileNavbar
             isMenuOpen={isMobileMenuOpen}
             onToggleMenu={toggleMobileMenu}
             onSearchClick={openSearch}
-            onRecruiterClick={() => handleEntryClick("Recruiter Mode")}
+            onRecruiterClick={handleRecruiterToggle}
           />
         </Container>
 
@@ -116,11 +130,11 @@ export function Navbar({ className }: NavbarProps) {
         <MobileMenu
           isOpen={isMobileMenuOpen}
           onClose={closeMobileMenu}
-          onRecruiterClick={() => handleEntryClick("Recruiter Mode")}
-          onProfileClick={() => handleEntryClick("Profile Mode")}
+          onRecruiterClick={handleRecruiterToggle}
+          onProfileClick={openProfileSwitcher}
         />
 
-        {/* Temporary Feedback Notification for Entry Point Verification */}
+        {/* Status Notification Toast */}
         {feedbackMessage && (
           <div
             role="status"
@@ -135,7 +149,16 @@ export function Navbar({ className }: NavbarProps) {
 
       {/* Global Search Overlay Modal */}
       <SearchOverlay isOpen={isSearchOpen} onClose={closeSearch} />
+
+      {/* Global Profile Switcher Dialog */}
+      <ProfileSwitcher
+        isOpen={isProfileSwitcherOpen}
+        onClose={() => setIsProfileSwitcherOpen(false)}
+        activeProfileId={profileId}
+        onSelectProfile={switchProfile}
+      />
     </>
   );
 }
+
 

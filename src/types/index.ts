@@ -7,6 +7,7 @@ export * from "./navigation";
 export * from "./project";
 export * from "./my-list";
 export * from "./search";
+export * from "./profile";
 
 export interface BaseEntity {
   id: string;

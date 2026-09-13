@@ -16,6 +16,7 @@ export * from "./mobile-showcase";
 export * from "./ai-showcase";
 export * from "./my-list";
 export * from "./search";
+export * from "./profile";
 
 
 

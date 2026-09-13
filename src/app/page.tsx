@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import {
   AppShell,
   CinematicIntro,
+  ProfileSelection,
   Hero,
   Container,
   Divider,
@@ -26,7 +27,7 @@ import {
   getAIProjects,
   getFeaturedAIProject,
 } from "@/data/projects";
-import { useIntroState } from "@/hooks";
+import { useIntroState, useProfile } from "@/hooks";
 import type { ProjectCardData } from "@/types";
 import { Sparkles, Compass, ShieldCheck } from "lucide-react";
 
@@ -38,6 +39,8 @@ export default function HomePage() {
     completeIntro,
     replayIntro,
   } = useIntroState();
+
+  const { profileId, isProfileSelected, setProfile } = useProfile();
 
   const [selectedProject, setSelectedProject] = useState<ProjectCardData | null>(null);
 
@@ -54,6 +57,8 @@ export default function HomePage() {
   const aiProjects = getAIProjects();
   const featuredAI = getFeaturedAIProject();
 
+  const showProfileSelection = isMounted && !isIntroActive && !isProfileSelected;
+
   return (
     <>
       {/* Cinematic Opening Intro Experience */}
@@ -61,6 +66,15 @@ export default function HomePage() {
         <CinematicIntro
           isActive={isIntroActive}
           onComplete={completeIntro}
+          hasReducedMotion={hasReducedMotion}
+        />
+      )}
+
+      {/* Phase 14: Who's watching? Profile Selection on first visit */}
+      {showProfileSelection && (
+        <ProfileSelection
+          onSelect={(id) => setProfile(id)}
+          selectedId={profileId}
           hasReducedMotion={hasReducedMotion}
         />
       )}

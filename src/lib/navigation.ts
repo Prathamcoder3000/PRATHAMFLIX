@@ -40,3 +40,11 @@ export const PRIMARY_NAV_ITEMS: NavItem[] = [
     icon: Bookmark,
   },
 ];
+
+export function getNavigationForProfile(profileId: string = "pratham"): NavItem[] {
+  if (profileId === "recruiter") {
+    // Recruiter mode: focused professional navigation
+    return PRIMARY_NAV_ITEMS.filter((item) => item.label !== "My List");
+  }
+  return PRIMARY_NAV_ITEMS;
+}

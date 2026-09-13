@@ -7,3 +7,4 @@ export * from "./useIntroState";
 export * from "./useScrollState";
 export * from "./useMyList";
 export * from "./useSearch";
+export * from "./useProfile";
