@@ -8,6 +8,7 @@ export * from "./project";
 export * from "./my-list";
 export * from "./search";
 export * from "./profile";
+export * from "./developer";
 
 export interface BaseEntity {
   id: string;

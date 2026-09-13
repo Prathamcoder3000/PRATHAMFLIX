@@ -17,6 +17,7 @@ import {
   ProjectPreview,
   MobileShowcase,
   AIShowcase,
+  DeveloperExperienceSection,
 } from "@/components";
 import {
   featuredProjects,
@@ -170,6 +171,8 @@ export default function HomePage() {
           </ContentRow>
         </div>
 
+        {/* Phase 15: Developer Experience, Currently Building & System Telemetry */}
+        <DeveloperExperienceSection />
 
         {/* Phase 8: Project Preview Dialog */}
         <ProjectPreview
@@ -177,6 +180,7 @@ export default function HomePage() {
           isOpen={Boolean(selectedProject)}
           onClose={handleClosePreview}
         />
+
 
         {/* Section Below Hero: Welcome & Architecture Overview */}
         <section className="py-12 sm:py-16 md:py-20 relative z-10">
