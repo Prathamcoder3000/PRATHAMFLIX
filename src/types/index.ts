@@ -10,6 +10,8 @@ export * from "./search";
 export * from "./profile";
 export * from "./developer";
 export * from "./portfolio";
+export * from "./credentials";
+export * from "./resume";
 
 export interface BaseEntity {
   id: string;

@@ -111,4 +111,38 @@
       scroll-behavior: auto !important;
     }
   }
+
+  /* Print Styles for Clean Resume Output */
+  @media print {
+    body {
+      background-color: #ffffff !important;
+      color: #111827 !important;
+    }
+    .no-print,
+    header,
+    nav,
+    footer,
+    [role="dialog"] {
+      display: none !important;
+    }
+    .print-document {
+      background-color: #ffffff !important;
+      color: #111827 !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 auto !important;
+      max-width: 100% !important;
+    }
+    .print-document * {
+      color: #111827 !important;
+      border-color: #e5e7eb !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+    .print-document a {
+      text-decoration: none !important;
+      color: #111827 !important;
+    }
+  }
 }

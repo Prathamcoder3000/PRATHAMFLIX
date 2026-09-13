@@ -19,6 +19,7 @@ import {
   AIShowcase,
   DeveloperExperienceSection,
   PortfolioPreviewSection,
+  CertificationPreviewSection,
 } from "@/components";
 import {
   featuredProjects,
@@ -177,6 +178,9 @@ export default function HomePage() {
 
         {/* Phase 16: Career & Identity Preview */}
         <PortfolioPreviewSection />
+
+        {/* Phase 17: Certifications & Continuous Learning Preview */}
+        <CertificationPreviewSection />
 
         {/* Phase 8: Project Preview Dialog */}
         <ProjectPreview

@@ -21,6 +21,8 @@ export * from "./developer-terminal";
 export * from "./developer";
 export * from "./portfolio";
 export * from "./career";
+export * from "./certifications";
+export * from "./resume";
 
 
 
