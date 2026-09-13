@@ -9,6 +9,7 @@ export interface ProjectCardData {
   accent?: string;
   featured?: boolean;
   href?: string;
+  isMobile?: boolean;
 }
 
 export type ProjectCardVariant = "default" | "featured";
@@ -21,6 +22,12 @@ export interface ArchitectureNode {
 }
 
 export interface ProjectFeature {
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+export interface MobileAppFeature {
   title: string;
   description: string;
   icon?: string;
@@ -46,4 +53,10 @@ export interface ProjectDetailData extends ProjectCardData {
   engineeringHighlights?: string[];
   techStackCategorized?: TechStackCategory[];
   links?: ProjectLinks;
+  platform?: "android" | "ios" | "cross-platform";
+  framework?: string;
+  deviceOrientation?: "portrait" | "landscape";
+  appFeatures?: MobileAppFeature[];
 }
+
+export type MobileProjectData = ProjectDetailData;

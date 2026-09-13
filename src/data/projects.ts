@@ -195,6 +195,11 @@ export const featuredProjects: ProjectDetailData[] = [
     year: "2024",
     technologies: ["React Native", "Expo", "SQLite", "TypeScript"],
     accent: "#ec4899",
+    featured: true,
+    isMobile: true,
+    platform: "cross-platform",
+    framework: "React Native & Expo",
+    deviceOrientation: "portrait",
     href: "/projects/featured-zeta",
     overview:
       "A cross-platform mobile collaboration client engineered with an offline-first SQLite synchronization engine, bidirectional conflict resolution, and fluid gesture interactions.",
@@ -212,6 +217,12 @@ export const featuredProjects: ProjectDetailData[] = [
       { title: "100% Offline Capability", description: "Full read/write workspace functionality without active network connection.", icon: "Smartphone" },
       { title: "Zero Data Conflict", description: "Deterministic conflict-free replicated data types (CRDT) merging changes.", icon: "GitMerge" },
       { title: "Fluid 60 FPS Gestures", description: "Native thread animations for buttery smooth swipe and drag interactions.", icon: "Sliders" },
+    ],
+    appFeatures: [
+      { title: "Offline SQLite Cache", description: "Embedded local relational database with zero-latency instant mutation commits.", icon: "Database" },
+      { title: "CRDT Sync Engine", description: "Mathematical conflict resolution automatically merging simultaneous peer edits.", icon: "GitMerge" },
+      { title: "Native Gesture Physics", description: "Hardware-accelerated gesture responders and natural spring sheet interactions.", icon: "Sliders" },
+      { title: "Biometric Passkey Unlock", description: "Hardware-backed biometric encryption securing local workspace files.", icon: "Fingerprint" },
     ],
     engineeringHighlights: [
       "Engineered an efficient local query caching layer yielding sub-16ms render times on low-end devices.",
@@ -659,3 +670,26 @@ export function getAdjacentProjects(id: string): {
 
   return { prev, next };
 }
+
+/**
+ * Single source of truth query helper for mobile applications
+ */
+export function getMobileProjects(): ProjectDetailData[] {
+  return allProjects.filter(
+    (p) =>
+      p.isMobile ||
+      p.category === "Mobile" ||
+      p.technologies?.some((t) =>
+        ["React Native", "Expo", "Flutter", "iOS", "Android", "Swift", "Kotlin"].includes(t)
+      )
+  );
+}
+
+/**
+ * Retrieve primary featured mobile project for spotlight presentation
+ */
+export function getFeaturedMobileProject(): ProjectDetailData {
+  const mobiles = getMobileProjects();
+  return mobiles[0] || featuredProjects[5];
+}
+

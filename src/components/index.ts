@@ -12,6 +12,8 @@ export * from "./content-row";
 export * from "./project-card";
 export * from "./project-preview";
 export * from "./project-detail";
+export * from "./mobile-showcase";
+
 
 
 

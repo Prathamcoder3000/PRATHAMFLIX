@@ -14,8 +14,15 @@ import {
   ContentRow,
   ProjectCard,
   ProjectPreview,
+  MobileShowcase,
 } from "@/components";
-import { featuredProjects, systemsProjects, experimentsProjects } from "@/data/projects";
+import {
+  featuredProjects,
+  systemsProjects,
+  experimentsProjects,
+  getMobileProjects,
+  getFeaturedMobileProject,
+} from "@/data/projects";
 import { useIntroState } from "@/hooks";
 import type { ProjectCardData } from "@/types";
 import { Sparkles, Compass, ShieldCheck } from "lucide-react";
@@ -39,6 +46,9 @@ export default function HomePage() {
     setSelectedProject(null);
   };
 
+  const mobileProjects = getMobileProjects();
+  const featuredMobile = getFeaturedMobileProject();
+
   return (
     <>
       {/* Cinematic Opening Intro Experience */}
@@ -59,13 +69,32 @@ export default function HomePage() {
         />
 
         {/* Phase 6, 7 & 8: Streaming-Style Content Rows with Interactive Project Cards & Previews */}
-        <div className="py-4 sm:py-6 space-y-6">
+        <div className="py-4 sm:py-6 space-y-8">
           <ContentRow
             title="Featured Work"
             subtitle="Curated structural showcase of engineering systems"
             seeAllHref="/projects"
           >
             {featuredProjects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onSelect={handleSelectProject}
+              />
+            ))}
+          </ContentRow>
+
+          {/* Phase 10: Featured Mobile Application Product Showcase */}
+          {featuredMobile && (
+            <MobileShowcase project={featuredMobile} />
+          )}
+
+          <ContentRow
+            title="Mobile Applications"
+            subtitle="Cross-platform clients, offline-first sync engines, and native gesture physics"
+            seeAllHref="/projects?category=mobile"
+          >
+            {mobileProjects.map((project) => (
               <ProjectCard
                 key={project.id}
                 project={project}
