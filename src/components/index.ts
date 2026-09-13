@@ -14,6 +14,7 @@ export * from "./project-preview";
 export * from "./project-detail";
 export * from "./mobile-showcase";
 export * from "./ai-showcase";
+export * from "./my-list";
 
 
 

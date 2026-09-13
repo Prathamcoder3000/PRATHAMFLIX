@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Heading1, Paragraph } from "@/components/ui/Typography";
 import { ProjectDetailMedia } from "./ProjectDetailMedia";
+import { MyListButton } from "@/components/my-list/MyListButton";
 import type { ProjectDetailData } from "@/types";
 
 export interface ProjectDetailHeroProps {
@@ -55,31 +56,31 @@ export const ProjectDetailHero: React.FC<ProjectDetailHeroProps> = ({
         )}
       </div>
 
-      {/* Action Buttons (if links exist) */}
-      {project.links && (project.links.github || project.links.live || project.links.demo) && (
-        <div className="flex flex-wrap items-center gap-3 pt-2">
-          {project.links.github && (
-            <Button
-              variant="outline"
-              size="md"
-              leftIcon={<FolderGit2 className="h-4 w-4" />}
-              onClick={() => window.open(project.links?.github, "_blank", "noopener,noreferrer")}
-            >
-              Source Code
-            </Button>
-          )}
-          {(project.links.live || project.links.demo) && (
-            <Button
-              variant="accent"
-              size="md"
-              rightIcon={<ArrowUpRight className="h-4 w-4" />}
-              onClick={() => window.open(project.links?.live || project.links?.demo, "_blank", "noopener,noreferrer")}
-            >
-              Live Demo
-            </Button>
-          )}
-        </div>
-      )}
+      {/* Action Buttons: My List + External Links */}
+      <div className="flex flex-wrap items-center gap-3 pt-2">
+        <MyListButton projectId={project.id} variant="default" />
+
+        {project.links?.github && (
+          <Button
+            variant="outline"
+            size="md"
+            leftIcon={<FolderGit2 className="h-4 w-4" />}
+            onClick={() => window.open(project.links?.github, "_blank", "noopener,noreferrer")}
+          >
+            Source Code
+          </Button>
+        )}
+        {(project.links?.live || project.links?.demo) && (
+          <Button
+            variant="outline"
+            size="md"
+            rightIcon={<ArrowUpRight className="h-4 w-4" />}
+            onClick={() => window.open(project.links?.live || project.links?.demo, "_blank", "noopener,noreferrer")}
+          >
+            Live Demo
+          </Button>
+        )}
+      </div>
 
       {/* Large Cinematic Project Visual */}
       <ProjectDetailMedia project={project} />

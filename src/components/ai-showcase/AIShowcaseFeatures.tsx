@@ -21,38 +21,22 @@ export interface AIShowcaseFeaturesProps {
   className?: string;
 }
 
-function getFeatureIcon(iconName?: string) {
-  switch (iconName?.toLowerCase()) {
-    case "binary":
-      return Binary;
-    case "boxes":
-      return Boxes;
-    case "database":
-      return Database;
-    case "cpu":
-      return Cpu;
-    case "zap":
-      return Zap;
-    case "sparkles":
-      return Sparkles;
-    case "gitfork":
-    case "git-fork":
-      return GitFork;
-    case "checksquare":
-    case "check-square":
-      return CheckSquare;
-    case "brain":
-      return Brain;
-    case "layers":
-      return Layers;
-    case "activity":
-      return Activity;
-    case "box":
-      return Box;
-    default:
-      return CheckCircle2;
-  }
-}
+const FEATURE_ICON_MAP: Record<string, React.ComponentType<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>> = {
+  binary: Binary,
+  boxes: Boxes,
+  database: Database,
+  cpu: Cpu,
+  zap: Zap,
+  sparkles: Sparkles,
+  gitfork: GitFork,
+  "git-fork": GitFork,
+  checksquare: CheckSquare,
+  "check-square": CheckSquare,
+  brain: Brain,
+  layers: Layers,
+  activity: Activity,
+  box: Box,
+};
 
 export const AIShowcaseFeatures: React.FC<AIShowcaseFeaturesProps> = ({
   features,
@@ -68,7 +52,7 @@ export const AIShowcaseFeatures: React.FC<AIShowcaseFeaturesProps> = ({
   return (
     <div className={`grid grid-cols-1 sm:grid-cols-3 gap-3 ${className}`}>
       {displayFeatures.map((feat, idx) => {
-        const Icon = getFeatureIcon(feat.icon);
+        const Icon = (feat.icon ? FEATURE_ICON_MAP[feat.icon.toLowerCase()] : null) || CheckCircle2;
 
         return (
           <div

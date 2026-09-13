@@ -26,49 +26,27 @@ export interface AIShowcasePipelineNodeProps {
   className?: string;
 }
 
-/**
- * Resolves icon name to Lucide React component with fallback
- */
-function getStageIcon(iconName?: string) {
-  switch (iconName?.toLowerCase()) {
-    case "database":
-      return Database;
-    case "cpu":
-      return Cpu;
-    case "binary":
-      return Binary;
-    case "boxes":
-      return Boxes;
-    case "zap":
-      return Zap;
-    case "layers":
-      return Layers;
-    case "sparkles":
-      return Sparkles;
-    case "box":
-      return Box;
-    case "filetext":
-    case "file-text":
-      return FileText;
-    case "gitfork":
-    case "git-fork":
-      return GitFork;
-    case "terminal":
-      return Terminal;
-    case "checksquare":
-    case "check-square":
-      return CheckSquare;
-    case "checkcircle":
-    case "check-circle":
-      return CheckCircle;
-    case "brain":
-      return Brain;
-    case "activity":
-      return Activity;
-    default:
-      return Workflow;
-  }
-}
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>> = {
+  database: Database,
+  cpu: Cpu,
+  binary: Binary,
+  boxes: Boxes,
+  zap: Zap,
+  layers: Layers,
+  sparkles: Sparkles,
+  box: Box,
+  filetext: FileText,
+  "file-text": FileText,
+  gitfork: GitFork,
+  "git-fork": GitFork,
+  terminal: Terminal,
+  checksquare: CheckSquare,
+  "check-square": CheckSquare,
+  checkcircle: CheckCircle,
+  "check-circle": CheckCircle,
+  brain: Brain,
+  activity: Activity,
+};
 
 /**
  * Get distinct type styling colors
@@ -95,7 +73,7 @@ export const AIShowcasePipelineNode: React.FC<AIShowcasePipelineNodeProps> = ({
   index,
   className = "",
 }) => {
-  const IconComponent = getStageIcon(node.icon);
+  const IconComponent = (node.icon ? ICON_MAP[node.icon.toLowerCase()] : null) || Workflow;
   const typeBadgeStyle = getTypeBadgeStyle(node.type);
 
   return (

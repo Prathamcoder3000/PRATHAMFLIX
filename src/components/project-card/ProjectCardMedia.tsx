@@ -1,5 +1,7 @@
 import React from "react";
 import Image from "next/image";
+import { BookmarkCheck } from "lucide-react";
+import { useMyList } from "@/hooks/useMyList";
 import { ProjectCardBadge } from "./ProjectCardBadge";
 import { ProjectCardOverlay } from "./ProjectCardOverlay";
 import type { ProjectCardData } from "@/types";
@@ -14,6 +16,8 @@ export const ProjectCardMedia: React.FC<ProjectCardMediaProps> = ({
   className = "",
 }) => {
   const accentColor = project.accent || "var(--accent)";
+  const { isSaved, isHydrated } = useMyList();
+  const saved = isHydrated && isSaved(project.id);
 
   return (
     <div
@@ -82,14 +86,24 @@ export const ProjectCardMedia: React.FC<ProjectCardMediaProps> = ({
         </div>
       )}
 
-      {/* Top Right: Year if present */}
-      {project.year && (
-        <div className="absolute top-2.5 right-2.5 z-10">
+      {/* Top Right: Saved Indicator & Year */}
+      <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5">
+        {saved && (
+          <span
+            title="Saved in My List"
+            className="p-1 rounded bg-[var(--accent)] text-white shadow-sm border border-[var(--accent)]/40 flex items-center justify-center animate-in fade-in"
+            aria-label="Saved in My List"
+          >
+            <BookmarkCheck className="h-3 w-3" aria-hidden="true" />
+          </span>
+        )}
+        {project.year && (
           <span className="text-[10px] font-mono font-medium text-neutral-400 bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded border border-white/10">
             {project.year}
           </span>
-        </div>
-      )}
+        )}
+      </div>
+
 
       {/* Hover Overlay & Action Affordance */}
       <ProjectCardOverlay accentColor={accentColor} />

@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { MyListButton } from "@/components/my-list/MyListButton";
 import type { ProjectCardData } from "@/types";
 
 export interface ProjectPreviewActionsProps {
@@ -17,8 +18,11 @@ export const ProjectPreviewActions: React.FC<ProjectPreviewActionsProps> = ({
 }) => {
   return (
     <div
-      className={`px-6 sm:px-8 pb-6 sm:pb-8 pt-2 flex items-center justify-end gap-3 bg-[#0e1017] rounded-b-2xl ${className}`}
+      className={`px-6 sm:px-8 pb-6 sm:pb-8 pt-2 flex flex-wrap items-center justify-end gap-3 bg-[#0e1017] rounded-b-2xl ${className}`}
     >
+      {/* My List Toggle Action */}
+      <MyListButton projectId={project.id} variant="outline" />
+
       <Button
         variant="secondary"
         size="md"
@@ -41,3 +45,4 @@ export const ProjectPreviewActions: React.FC<ProjectPreviewActionsProps> = ({
     </div>
   );
 };
+
