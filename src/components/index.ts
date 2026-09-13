@@ -23,6 +23,7 @@ export * from "./portfolio";
 export * from "./career";
 export * from "./certifications";
 export * from "./resume";
+export * from "./github";
 
 
 

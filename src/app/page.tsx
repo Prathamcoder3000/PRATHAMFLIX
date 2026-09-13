@@ -20,6 +20,7 @@ import {
   DeveloperExperienceSection,
   PortfolioPreviewSection,
   CertificationPreviewSection,
+  GitHubPreviewSection,
 } from "@/components";
 import {
   featuredProjects,
@@ -181,6 +182,9 @@ export default function HomePage() {
 
         {/* Phase 17: Certifications & Continuous Learning Preview */}
         <CertificationPreviewSection />
+
+        {/* Phase 18: GitHub & Open Source Preview */}
+        <GitHubPreviewSection />
 
         {/* Phase 8: Project Preview Dialog */}
         <ProjectPreview
