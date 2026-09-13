@@ -7,6 +7,19 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, Cpu } from "lucide-react";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Skills & Technical Capabilities",
+  description:
+    "Comprehensive directory of full-stack engineering proficiencies, languages, tools, and platforms.",
+  openGraph: {
+    title: "Skills & Technical Capabilities — PRATHAMFLIX",
+    description:
+      "Comprehensive directory of full-stack engineering proficiencies, languages, tools, and platforms.",
+  },
+};
+
 export default function SkillsPage() {
   return (
     <AppShell>

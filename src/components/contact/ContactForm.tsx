@@ -169,6 +169,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         {apiResponse && !apiResponse.success && (
           <div
             role="alert"
+            aria-live="polite"
             className={`p-4 rounded-xl text-xs sm:text-sm flex items-start gap-3 border ${
               apiResponse.status === "unconfigured"
                 ? "bg-amber-500/10 border-amber-500/30 text-amber-200"
@@ -228,6 +229,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               type="text"
               name="name"
               required
+              autoComplete="name"
               value={formData.name}
               onChange={handleChange}
               placeholder="e.g. Alex Mercer"
@@ -259,6 +261,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               type="email"
               name="email"
               required
+              autoComplete="email"
+              inputMode="email"
               value={formData.email}
               onChange={handleChange}
               placeholder="e.g. alex@company.com"
@@ -301,7 +305,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               }`}
             >
               {CONTACT_REASONS.map((r) => (
-                <option key={r.value} value={r.value} className="bg-neutral-900 text-white">
+				<option key={r.value} value={r.value} className="bg-neutral-900 text-white">
                   {r.label}
                 </option>
               ))}
@@ -326,6 +330,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               id="contact-company"
               type="text"
               name="company"
+              autoComplete="organization"
               value={formData.company}
               onChange={handleChange}
               placeholder="e.g. TechCorp / University"

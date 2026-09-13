@@ -7,6 +7,19 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, Trophy } from "lucide-react";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Achievements & Milestones",
+  description:
+    "Engineering awards, hackathon highlights, and architectural project milestones.",
+  openGraph: {
+    title: "Achievements & Milestones — PRATHAMFLIX",
+    description:
+      "Engineering awards, hackathon highlights, and architectural project milestones.",
+  },
+};
+
 export default function AchievementsPage() {
   return (
     <AppShell>

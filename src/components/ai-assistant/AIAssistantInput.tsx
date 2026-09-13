@@ -56,6 +56,7 @@ export const AIAssistantInput: React.FC<AIAssistantInputProps> = ({
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={isLoading ? "Generating grounded response..." : "Ask about projects, AI, skills, resume..."}
+          aria-label="Ask AI Assistant about projects, skills, or resume"
           disabled={disabled || isLoading}
           maxLength={1000}
           className="w-full bg-transparent text-base sm:text-sm text-white placeholder-zinc-500 focus:outline-none py-1.5 pr-10 disabled:opacity-50"

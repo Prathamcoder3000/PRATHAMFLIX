@@ -38,16 +38,29 @@ export async function generateMetadata({
 
   if (!project) {
     return {
-      title: "Project Not Found — PRATHAMFLIX",
+      title: "Project Not Found",
       description: "The requested project could not be found.",
     };
   }
 
+  const title = `${project.title} — Architecture Breakdown`;
+  const description =
+    project.shortDescription ||
+    `Engineering case study and system architecture breakdown for ${project.title}.`;
+
   return {
-    title: `${project.title} — PRATHAMFLIX`,
-    description:
-      project.shortDescription ||
-      `Engineering case study and architecture breakdown for ${project.title}.`,
+    title,
+    description,
+    openGraph: {
+      title: `${title} — PRATHAMFLIX`,
+      description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} — PRATHAMFLIX`,
+      description,
+    },
   };
 }
 

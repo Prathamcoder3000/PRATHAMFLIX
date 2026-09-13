@@ -17,9 +17,17 @@ import {
 } from "@/data/projects";
 import { ArrowLeft, FolderGit2 } from "lucide-react";
 
-export const metadata = {
-  title: "Projects — PRATHAMFLIX",
-  description: "Browse all engineering systems, cloud architectures, and experimental projects.",
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projects & Engineering Systems",
+  description:
+    "Browse all engineering systems, distributed architectures, mobile clients, and experimental projects.",
+  openGraph: {
+    title: "Projects & Engineering Systems — PRATHAMFLIX",
+    description:
+      "Browse all engineering systems, distributed architectures, mobile clients, and experimental projects.",
+  },
 };
 
 export default function ProjectsPage() {

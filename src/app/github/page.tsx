@@ -16,6 +16,19 @@ import {
 import { fetchGitHubData, DEFAULT_GITHUB_USERNAME } from "@/lib/github";
 import { ArrowLeft, ExternalLink, Code2 } from "lucide-react";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "GitHub Repositories & Open Source Activity",
+  description:
+    "Live telemetry, open source repositories, and public engineering commits synchronized directly with GitHub.",
+  openGraph: {
+    title: "GitHub Repositories & Open Source Activity — PRATHAMFLIX",
+    description:
+      "Live telemetry, open source repositories, and public engineering commits synchronized directly with GitHub.",
+  },
+};
+
 export const revalidate = 3600; // 1 hour ISR revalidation
 
 function GithubIcon({ className = "h-4 w-4" }: { className?: string }) {
