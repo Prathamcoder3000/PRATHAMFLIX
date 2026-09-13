@@ -12,6 +12,7 @@ export * from "./developer";
 export * from "./portfolio";
 export * from "./credentials";
 export * from "./resume";
+export * from "./ai-assistant";
 
 export interface BaseEntity {
   id: string;

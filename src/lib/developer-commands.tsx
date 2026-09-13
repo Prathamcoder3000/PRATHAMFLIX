@@ -18,6 +18,7 @@ export const TERMINAL_COMMANDS: Record<string, TerminalCommandDef> = {
           <div><span className="text-[var(--accent)] font-bold">skills</span> - Categorized technology stack</div>
           <div><span className="text-[var(--accent)] font-bold">resume</span> - Interactive developer resume</div>
           <div><span className="text-[var(--accent)] font-bold">whoami</span> - Display active profile identity</div>
+          <div><span className="text-[var(--accent)] font-bold">ask &lt;q&gt;</span> - Query PRATHAMFLIX AI Assistant</div>
           <div><span className="text-[var(--accent)] font-bold">status</span> - System engine health & state</div>
           <div><span className="text-[var(--accent)] font-bold">switch</span> - Switch profile (pratham/recruiter)</div>
           <div><span className="text-[var(--accent)] font-bold">contact</span> - Contact & profile channels</div>
@@ -26,6 +27,36 @@ export const TERMINAL_COMMANDS: Record<string, TerminalCommandDef> = {
         </div>
       </div>
     ),
+  },
+
+  ask: {
+    command: "ask",
+    description: "Ask PRATHAMFLIX AI Assistant a question (e.g. 'ask what mobile apps exist')",
+    aliases: ["ai", "assistant"],
+    handler: (args) => {
+      const query = args.join(" ").trim();
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(
+          new CustomEvent("prathamflix_open_assistant", { detail: { query } })
+        );
+      }
+      return (
+        <div className="space-y-1 font-mono text-xs text-purple-300">
+          <p className="font-bold flex items-center gap-1.5">
+            <span className="text-[var(--accent)]">✦</span> Opening PRATHAMFLIX AI Assistant...
+          </p>
+          {query ? (
+            <p className="text-neutral-400">
+              Query dispatched: <span className="text-white">&quot;{query}&quot;</span>
+            </p>
+          ) : (
+            <p className="text-neutral-500">
+              Tip: You can pass a direct question, e.g. <code className="text-neutral-300">ask what does Pratham build</code>
+            </p>
+          )}
+        </div>
+      );
+    },
   },
 
   about: {

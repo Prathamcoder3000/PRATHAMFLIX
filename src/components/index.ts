@@ -25,6 +25,7 @@ export * from "./certifications";
 export * from "./resume";
 export * from "./github";
 export * from "./contact";
+export * from "./ai-assistant";
 
 
 
