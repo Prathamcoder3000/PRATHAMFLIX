@@ -7,13 +7,19 @@ import type { Profile, ProfileId, ProfileState } from "@/types";
 const STORAGE_KEY = "prathamflix_profile";
 const SYNC_EVENT = "prathamflix_profile_change";
 
-let cachedRaw: string | null = null;
-let cachedProfileId: ProfileId = "pratham";
-let cachedHasSelected = false;
+type Snapshot = { id: ProfileId; hasSelected: boolean };
 
-function getSnapshot(): { id: ProfileId; hasSelected: boolean } {
+const SERVER_SNAPSHOT: Snapshot = { id: "pratham", hasSelected: true };
+const INITIAL_VISIT_SNAPSHOT: Snapshot = { id: "pratham", hasSelected: false };
+const PRATHAM_SELECTED_SNAPSHOT: Snapshot = { id: "pratham", hasSelected: true };
+const RECRUITER_SELECTED_SNAPSHOT: Snapshot = { id: "recruiter", hasSelected: true };
+
+let cachedRaw: string | null | undefined = undefined;
+let cachedSnapshot: Snapshot = SERVER_SNAPSHOT;
+
+function getSnapshot(): Snapshot {
   if (typeof window === "undefined") {
-    return { id: "pratham", hasSelected: true };
+    return SERVER_SNAPSHOT;
   }
 
   try {
@@ -21,32 +27,25 @@ function getSnapshot(): { id: ProfileId; hasSelected: boolean } {
     if (raw !== cachedRaw) {
       cachedRaw = raw;
       if (raw === "recruiter") {
-        cachedProfileId = "recruiter";
-        cachedHasSelected = true;
+        cachedSnapshot = RECRUITER_SELECTED_SNAPSHOT;
       } else if (raw === "pratham") {
-        cachedProfileId = "pratham";
-        cachedHasSelected = true;
+        cachedSnapshot = PRATHAM_SELECTED_SNAPSHOT;
       } else if (raw && raw !== "null") {
         // Invalid stored value fallback
-        cachedProfileId = "pratham";
-        cachedHasSelected = true;
+        cachedSnapshot = PRATHAM_SELECTED_SNAPSHOT;
       } else {
         // Not yet selected (First visit)
-        cachedProfileId = "pratham";
-        cachedHasSelected = false;
+        cachedSnapshot = INITIAL_VISIT_SNAPSHOT;
       }
     }
   } catch {
-    cachedProfileId = "pratham";
-    cachedHasSelected = false;
+    return SERVER_SNAPSHOT;
   }
 
-  return { id: cachedProfileId, hasSelected: cachedHasSelected };
+  return cachedSnapshot;
 }
 
-const SERVER_SNAPSHOT = { id: "pratham" as ProfileId, hasSelected: true };
-
-function getServerSnapshot(): { id: ProfileId; hasSelected: boolean } {
+function getServerSnapshot(): Snapshot {
   return SERVER_SNAPSHOT;
 }
 

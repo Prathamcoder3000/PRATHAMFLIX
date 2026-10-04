@@ -57,9 +57,9 @@ export const AIShowcaseModel: React.FC<AIShowcaseModelProps> = ({
         </div>
       </div>
 
-      {/* Central Visual: Procedural Neural Graph Core */}
-      <div className="relative z-10 my-8 py-4 flex items-center justify-center">
-        <div className="relative w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center">
+      {/* Central Visual: Procedural Agentic Bio-Feedback & Utility Core */}
+      <div className="relative z-10 my-6 py-2 flex flex-col items-center justify-center space-y-4">
+        <div className="relative w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center">
           {/* Outer Pulsing Glow Ring */}
           <div
             className="absolute inset-0 rounded-full border border-purple-500/20 animate-[spin_30s_linear_infinite]"
@@ -69,33 +69,46 @@ export const AIShowcaseModel: React.FC<AIShowcaseModelProps> = ({
           />
 
           {/* Middle Dashed Ring */}
-          <div className="absolute inset-4 rounded-full border border-dashed border-white/15 animate-[spin_20s_linear_infinite_reverse]" />
+          <div className="absolute inset-3 rounded-full border border-dashed border-white/15 animate-[spin_20s_linear_infinite_reverse]" />
 
           {/* Inner Accent Ring */}
-          <div className="absolute inset-10 rounded-full border border-purple-500/30 bg-purple-950/20 backdrop-blur-sm" />
+          <div className="absolute inset-8 rounded-full border border-purple-500/30 bg-purple-950/20 backdrop-blur-sm" />
 
           {/* Center Neural Core Node */}
-          <div className="relative z-10 flex flex-col items-center justify-center text-center p-4">
-            <div className="p-3 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-500 text-white shadow-lg shadow-purple-500/30 mb-1.5">
-              <Zap className="h-6 w-6" aria-hidden="true" />
+          <div className="relative z-10 flex flex-col items-center justify-center text-center p-3">
+            <div className="p-2.5 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-500 text-white shadow-lg shadow-purple-500/30 mb-1">
+              <Zap className="h-5 w-5" aria-hidden="true" />
             </div>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
-              Execution Node
+            <span className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+              Agentic Core
             </span>
-            <span className="text-xs font-bold text-white max-w-[120px] truncate">
-              {modelInfo?.framework || "Hardware Acceleration"}
+            <span className="text-[11px] font-bold text-white max-w-[120px] truncate">
+              {modelInfo?.framework || "FastAPI & Python"}
             </span>
           </div>
 
-          {/* Procedural Orbiting Graph Nodes */}
-          <div className="absolute top-2 left-1/2 -translate-x-1/2 p-1.5 rounded-full bg-neutral-900 border border-purple-500/40 text-purple-300">
-            <div className="h-2 w-2 rounded-full bg-purple-400 animate-ping" />
+          {/* Procedural State Nodes */}
+          <div className="absolute top-1 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-neutral-900 border border-emerald-500/40 text-[10px] font-mono text-emerald-400 flex items-center gap-1 shadow-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
+            <span>FOCUSED</span>
           </div>
-          <div className="absolute bottom-4 left-6 p-1.5 rounded-full bg-neutral-900 border border-white/20 text-neutral-400">
-            <div className="h-2 w-2 rounded-full bg-blue-400" />
+          <div className="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-neutral-900 border border-amber-500/40 text-[10px] font-mono text-amber-400">
+            STRESSED
           </div>
-          <div className="absolute bottom-4 right-6 p-1.5 rounded-full bg-neutral-900 border border-white/20 text-neutral-400">
-            <div className="h-2 w-2 rounded-full bg-emerald-400" />
+          <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-full bg-neutral-900 border border-red-500/40 text-[10px] font-mono text-red-400">
+            FATIGUED
+          </div>
+        </div>
+
+        {/* Live Telemetry Sensor Stream Simulation */}
+        <div className="w-full grid grid-cols-2 gap-2 text-center font-mono text-xs pt-1">
+          <div className="p-2 rounded-lg bg-white/5 border border-white/5">
+            <span className="text-[10px] text-neutral-400 block">Heart Rate</span>
+            <span className="font-bold text-emerald-400 text-xs">72 BPM (Stable)</span>
+          </div>
+          <div className="p-2 rounded-lg bg-white/5 border border-white/5">
+            <span className="text-[10px] text-neutral-400 block">GSR Conductance</span>
+            <span className="font-bold text-purple-300 text-xs">4.8 &mu;S (Nominal)</span>
           </div>
         </div>
       </div>

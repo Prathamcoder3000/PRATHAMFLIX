@@ -17,6 +17,7 @@ import {
   Brain,
   Activity,
   Workflow,
+  Scale,
 } from "lucide-react";
 
 export interface AIShowcasePipelineNodeProps {
@@ -46,6 +47,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string; "aria-h
   "check-circle": CheckCircle,
   brain: Brain,
   activity: Activity,
+  scale: Scale,
 };
 
 /**

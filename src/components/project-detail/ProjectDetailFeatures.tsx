@@ -45,6 +45,11 @@ import {
   Terminal,
   Code2,
   Globe,
+  Wand2,
+  FolderPlus,
+  BookOpen,
+  BarChart3,
+  Scale,
   LucideIcon,
 } from "lucide-react";
 import type { ProjectDetailData } from "@/types";
@@ -94,6 +99,11 @@ const iconMap: Record<string, LucideIcon> = {
   Terminal,
   Code2,
   Globe,
+  Wand2,
+  FolderPlus,
+  BookOpen,
+  BarChart3,
+  Scale,
 };
 
 export interface ProjectDetailFeaturesProps {

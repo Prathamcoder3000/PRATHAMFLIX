@@ -91,7 +91,7 @@ export const GitHubActivity: React.FC<GitHubActivityProps> = ({
               </div>
 
               <div className="flex items-center gap-3 shrink-0">
-                <span className="text-[11px] font-mono text-neutral-500">
+                <span suppressHydrationWarning className="text-[11px] font-mono text-neutral-500">
                   {relativeTime}
                 </span>
 

@@ -7,9 +7,9 @@ import type { ProjectDetailData, MyListState } from "@/types";
 const STORAGE_KEY = "prathamflix_my_list";
 const SYNC_EVENT = "prathamflix_my_list_change";
 
-let cachedRaw: string | null = null;
-let cachedIds: string[] = [];
 const SERVER_SNAPSHOT: string[] = [];
+let cachedRaw: string | null | undefined = undefined;
+let cachedIds: string[] = SERVER_SNAPSHOT;
 
 /**
  * Reads stored IDs from localStorage with snapshot caching
@@ -24,18 +24,18 @@ function getSnapshot(): string[] {
     if (raw !== cachedRaw) {
       cachedRaw = raw;
       if (!raw) {
-        cachedIds = [];
+        cachedIds = SERVER_SNAPSHOT;
       } else {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) {
           cachedIds = parsed.filter((id) => typeof id === "string" && id.trim().length > 0);
         } else {
-          cachedIds = [];
+          cachedIds = SERVER_SNAPSHOT;
         }
       }
     }
   } catch {
-    cachedIds = [];
+    return SERVER_SNAPSHOT;
   }
 
   return cachedIds;

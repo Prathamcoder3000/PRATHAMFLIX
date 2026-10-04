@@ -109,7 +109,7 @@ export const GitHubRepositoryCard: React.FC<GitHubRepositoryCardProps> = ({
             <span>{repository.forks}</span>
           </div>
 
-          <span className="text-[11px] text-neutral-500 hidden sm:inline">
+          <span suppressHydrationWarning className="text-[11px] text-neutral-500 hidden sm:inline">
             Updated {relativeUpdated}
           </span>
         </div>

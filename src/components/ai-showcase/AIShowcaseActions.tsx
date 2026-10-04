@@ -31,21 +31,27 @@ export const AIShowcaseActions: React.FC<AIShowcaseActionsProps> = ({
 
       {/* Optional Secondary Action: Source Code */}
       {project.links?.github && (
-        <Button
-          variant="outline"
-          size="md"
-          leftIcon={<FolderGit2 className="h-4 w-4" />}
-          onClick={() => window.open(project.links?.github, "_blank", "noopener,noreferrer")}
-          className="font-medium text-xs sm:text-sm"
+        <a
+          href={project.links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex"
         >
-          Source Code
-        </Button>
+          <Button
+            variant="outline"
+            size="md"
+            leftIcon={<FolderGit2 className="h-4 w-4" />}
+            className="font-medium text-xs sm:text-sm"
+          >
+            Source Code
+          </Button>
+        </a>
       )}
 
       {/* Tech Stack Indicator */}
-      <div className="hidden sm:flex items-center gap-1.5 ml-auto font-mono text-[11px] text-neutral-500">
-        <Cpu className="h-3.5 w-3.5 text-neutral-400" />
-        <span>Hardware Accelerated</span>
+      <div className="hidden sm:flex items-center gap-1.5 ml-auto font-mono text-[11px] text-neutral-400">
+        <Cpu className="h-3.5 w-3.5 text-purple-400" />
+        <span>{project.modelInfo?.framework || "Agentic Python Core"}</span>
       </div>
     </div>
   );

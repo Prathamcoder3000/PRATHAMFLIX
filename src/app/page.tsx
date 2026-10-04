@@ -15,7 +15,7 @@ import {
   Badge,
   ContentRow,
   ProjectCard,
-  MobileShowcase,
+  FeaturedSpotlightCard,
   AIShowcase,
   DeveloperExperienceSection,
   PortfolioPreviewSection,
@@ -33,13 +33,12 @@ import {
   systemsProjects,
   experimentsProjects,
   getMobileProjects,
-  getFeaturedMobileProject,
   getAIProjects,
   getFeaturedAIProject,
 } from "@/data/projects";
 import { useIntroState, useProfile } from "@/hooks";
 import type { ProjectCardData } from "@/types";
-import { Sparkles, Compass, ShieldCheck } from "lucide-react";
+import { Sparkles, Compass, ShieldCheck, Layers, Cpu, Globe } from "lucide-react";
 
 export default function HomePage() {
   const {
@@ -62,8 +61,9 @@ export default function HomePage() {
     setSelectedProject(null);
   };
 
+  const promptGenius = featuredProjects[0];
+  const supportingFeatured = featuredProjects.slice(1);
   const mobileProjects = getMobileProjects();
-  const featuredMobile = getFeaturedMobileProject();
   const aiProjects = getAIProjects();
   const featuredAI = getFeaturedAIProject();
 
@@ -97,14 +97,96 @@ export default function HomePage() {
           onReplayIntro={replayIntro}
         />
 
-        {/* Phase 6, 7, 8, 10, 11: Streaming-Style Content Rows & Product Showcases */}
-        <div className="py-4 sm:py-6 space-y-8">
+        {/* Cinematic Capability Strip (Connecting Hero to Featured Work) */}
+        <section className="py-6 sm:py-8 relative z-10">
+          <Container maxWidth="2xl">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-5">
+              <Surface
+                elevation="subtle"
+                padding="md"
+                className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-transparent p-4 sm:p-5 flex items-start gap-3.5 hover:border-white/20 transition-colors"
+              >
+                <div className="p-2 rounded-xl bg-[var(--accent)]/10 text-[var(--accent)] shrink-0 border border-[var(--accent)]/20">
+                  <Globe className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <div className="space-y-1 min-w-0">
+                  <div className="text-xs font-mono uppercase tracking-wider text-neutral-400 font-semibold">
+                    Full-Stack Systems
+                  </div>
+                  <div className="text-sm font-bold text-white tracking-tight">
+                    Next.js 16 · React 19 · Node
+                  </div>
+                  <Paragraph className="text-xs text-neutral-400 line-clamp-2">
+                    Production-grade full-stack architectures with low-latency APIs and reactive UI.
+                  </Paragraph>
+                </div>
+              </Surface>
+
+              <Surface
+                elevation="subtle"
+                padding="md"
+                className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-transparent p-4 sm:p-5 flex items-start gap-3.5 hover:border-purple-500/30 transition-colors"
+              >
+                <div className="p-2 rounded-xl bg-purple-500/10 text-purple-400 shrink-0 border border-purple-500/20">
+                  <Cpu className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <div className="space-y-1 min-w-0">
+                  <div className="text-xs font-mono uppercase tracking-wider text-purple-400/80 font-semibold">
+                    Intelligent Agents
+                  </div>
+                  <div className="text-sm font-bold text-white tracking-tight">
+                    Agentic AI · Bio-Telemetry
+                  </div>
+                  <Paragraph className="text-xs text-neutral-400 line-clamp-2">
+                    Model-based closed-loop decision agents and real-time inference workflows.
+                  </Paragraph>
+                </div>
+              </Surface>
+
+              <Surface
+                elevation="subtle"
+                padding="md"
+                className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-transparent p-4 sm:p-5 flex items-start gap-3.5 hover:border-blue-500/30 transition-colors"
+              >
+                <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400 shrink-0 border border-blue-500/20">
+                  <Layers className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <div className="space-y-1 min-w-0">
+                  <div className="text-xs font-mono uppercase tracking-wider text-blue-400/80 font-semibold">
+                    Engineering Polish
+                  </div>
+                  <div className="text-sm font-bold text-white tracking-tight">
+                    Cinematic UX · TypeScript
+                  </div>
+                  <Paragraph className="text-xs text-neutral-400 line-clamp-2">
+                    Design tokens, GPU animations, high-contrast accessibility, and type safety.
+                  </Paragraph>
+                </div>
+              </Surface>
+            </div>
+          </Container>
+        </section>
+
+        {/* Phase 6: FEATURED WORK (The Main Event) */}
+        <section className="pt-6 pb-8 relative z-10">
+          <Container maxWidth="2xl">
+            {promptGenius && (
+              <FeaturedSpotlightCard
+                project={promptGenius}
+                onSelect={handleSelectProject}
+              />
+            )}
+          </Container>
+        </section>
+
+        {/* Content Rows with Atmospheric Transitions */}
+        <div className="py-4 sm:py-6 space-y-10 relative z-10">
           <ContentRow
-            title="Featured Work"
-            subtitle="Curated structural showcase of engineering systems"
+            title="Selected Engineering Systems"
+            subtitle="Curated structural showcase of engineering systems and applications"
             seeAllHref="/projects"
           >
-            {featuredProjects.map((project) => (
+            {supportingFeatured.map((project) => (
               <ProjectCard
                 key={project.id}
                 project={project}
@@ -120,7 +202,7 @@ export default function HomePage() {
 
           <ContentRow
             title="AI / ML & Intelligent Systems"
-            subtitle="Neural inference acceleration, multi-agent DAG orchestrators, and spatial computer vision"
+            subtitle="Agentic AI, intelligent applications, machine learning, and applied AI systems"
             seeAllHref="/projects?category=ai"
           >
             {aiProjects.map((project) => (
@@ -131,11 +213,6 @@ export default function HomePage() {
               />
             ))}
           </ContentRow>
-
-          {/* Phase 10: Featured Mobile Application Product Showcase */}
-          {featuredMobile && (
-            <MobileShowcase project={featuredMobile} />
-          )}
 
           <ContentRow
             title="Mobile Applications"
@@ -152,7 +229,7 @@ export default function HomePage() {
           </ContentRow>
 
           <ContentRow
-            title="Systems & Applications"
+            title="Systems & Distributed Services"
             subtitle="Full-stack web apps, cloud services, and real-time tools"
             seeAllHref="/projects?category=systems"
           >
@@ -167,7 +244,7 @@ export default function HomePage() {
 
           <ContentRow
             title="Explore & Experiments"
-            subtitle="Artificial intelligence, machine learning, and creative code"
+            subtitle="Artificial intelligence, algorithmic prototypes, and creative code"
             seeAllHref="/projects?category=experiments"
           >
             {experimentsProjects.map((project) => (
@@ -183,14 +260,14 @@ export default function HomePage() {
         {/* Phase 15: Developer Experience, Currently Building & System Telemetry */}
         <DeveloperExperienceSection />
 
+        {/* Phase 18: GitHub & Open Source Preview */}
+        <GitHubPreviewSection />
+
         {/* Phase 16: Career & Identity Preview */}
         <PortfolioPreviewSection />
 
         {/* Phase 17: Certifications & Continuous Learning Preview */}
         <CertificationPreviewSection />
-
-        {/* Phase 18: GitHub & Open Source Preview */}
-        <GitHubPreviewSection />
 
         {/* Phase 19: Contact System & Direct Outreach CTA */}
         <ContactPreviewSection />
@@ -201,54 +278,9 @@ export default function HomePage() {
           isOpen={Boolean(selectedProject)}
           onClose={handleClosePreview}
         />
-
-
-        {/* Section Below Hero: Welcome & Architecture Overview */}
-        <section className="py-12 sm:py-16 md:py-20 relative z-10">
-          <Container maxWidth="2xl">
-            <Divider variant="gradient" className="mb-12" />
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Surface elevation="subtle" padding="lg" className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-[var(--accent)]" aria-hidden="true" />
-                  <Badge variant="accent">Cinematic Experience</Badge>
-                </div>
-                <Heading3 className="text-lg">Streaming UX Philosophy</Heading3>
-                <Paragraph className="text-xs sm:text-sm text-neutral-400">
-                  Engineered with atmospheric lighting, smooth GPU transitions, and rich
-                  cinematic interaction patterns.
-                </Paragraph>
-              </Surface>
-
-              <Surface elevation="subtle" padding="lg" className="space-y-[3px] space-y-3">
-                <div className="flex items-center gap-2">
-                  <Compass className="h-4 w-4 text-[var(--accent)]" aria-hidden="true" />
-                  <Badge variant="subtle">Modern Architecture</Badge>
-                </div>
-                <Heading3 className="text-lg">Full-Stack Foundation</Heading3>
-                <Paragraph className="text-xs sm:text-sm text-neutral-400">
-                  Built on Next.js App Router, TypeScript, and Tailwind CSS v4 with modular
-                  design tokens and reusable primitives.
-                </Paragraph>
-              </Surface>
-
-              <Surface elevation="subtle" padding="lg" className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-[var(--accent)]" aria-hidden="true" />
-                  <Badge variant="subtle">Verified Engineering</Badge>
-                </div>
-                <Heading3 className="text-lg">Specialized Domains</Heading3>
-                <Paragraph className="text-xs sm:text-sm text-neutral-400">
-                  Covering Computer Engineering, Full-Stack applications, Mobile development,
-                  AI/ML models, and connected IoT systems.
-                </Paragraph>
-              </Surface>
-            </div>
-          </Container>
-        </section>
       </AppShell>
     </>
   );
 }
+
 

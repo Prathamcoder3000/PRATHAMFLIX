@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, FolderGit2 } from "lucide-react";
@@ -61,24 +63,36 @@ export const ProjectDetailHero: React.FC<ProjectDetailHeroProps> = ({
         <MyListButton projectId={project.id} variant="default" />
 
         {project.links?.github && (
-          <Button
-            variant="outline"
-            size="md"
-            leftIcon={<FolderGit2 className="h-4 w-4" />}
-            onClick={() => window.open(project.links?.github, "_blank", "noopener,noreferrer")}
+          <a
+            href={project.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex"
           >
-            Source Code
-          </Button>
+            <Button
+              variant="outline"
+              size="md"
+              leftIcon={<FolderGit2 className="h-4 w-4" />}
+            >
+              Source Code
+            </Button>
+          </a>
         )}
         {(project.links?.live || project.links?.demo) && (
-          <Button
-            variant="outline"
-            size="md"
-            rightIcon={<ArrowUpRight className="h-4 w-4" />}
-            onClick={() => window.open(project.links?.live || project.links?.demo, "_blank", "noopener,noreferrer")}
+          <a
+            href={project.links.live || project.links.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex"
           >
-            Live Demo
-          </Button>
+            <Button
+              variant="outline"
+              size="md"
+              rightIcon={<ArrowUpRight className="h-4 w-4" />}
+            >
+              Live Demo
+            </Button>
+          </a>
         )}
       </div>
 

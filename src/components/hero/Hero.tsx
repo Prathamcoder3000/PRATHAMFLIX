@@ -4,6 +4,7 @@ import React from "react";
 import { Container } from "@/components/ui/Container";
 import { HeroBackground } from "./HeroBackground";
 import { HeroContent } from "./HeroContent";
+import { HeroVisual } from "./HeroVisual";
 import { HeroScrollCue } from "./HeroScrollCue";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +22,7 @@ export function Hero({
   return (
     <section
       className={cn(
-        "relative w-full min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-center overflow-hidden pt-12 pb-16 sm:pb-20",
+        "relative w-full min-h-[78vh] lg:min-h-[84vh] flex flex-col justify-center overflow-hidden pt-8 sm:pt-12 pb-10 sm:pb-16",
         className
       )}
       aria-label="PRATHAM Featured Developer Showcase"
@@ -29,18 +30,28 @@ export function Hero({
       {/* Background Lighting & Atmospheric Gradients */}
       <HeroBackground hasReducedMotion={hasReducedMotion} />
 
-      {/* Main Content Area */}
+      {/* Main Content Area: 2-Column Cinematic Layout */}
       <div className="relative z-10 w-full my-auto">
         <Container maxWidth="2xl">
-          <HeroContent
-            hasReducedMotion={hasReducedMotion}
-            onReplayIntro={onReplayIntro}
-          />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left 7 Columns: Developer Identity & CTA Actions */}
+            <div className="lg:col-span-7">
+              <HeroContent
+                hasReducedMotion={hasReducedMotion}
+                onReplayIntro={onReplayIntro}
+              />
+            </div>
+
+            {/* Right 5 Columns: Cinematic Developer Universe Architecture Panel */}
+            <div className="lg:col-span-5">
+              <HeroVisual hasReducedMotion={hasReducedMotion} />
+            </div>
+          </div>
         </Container>
       </div>
 
       {/* Subtle Bottom Scroll Cue */}
-      <div className="relative z-10 mt-auto pt-6 pb-2">
+      <div className="relative z-10 mt-auto pt-4 pb-1">
         <HeroScrollCue hasReducedMotion={hasReducedMotion} />
       </div>
     </section>

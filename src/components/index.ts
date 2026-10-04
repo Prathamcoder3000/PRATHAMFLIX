@@ -30,6 +30,7 @@ export * from "./cinema";
 export * from "./transitions";
 export * from "./shortcuts";
 export * from "./easter-eggs";
+export * from "./featured-spotlight";
 
 
 
